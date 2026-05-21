@@ -2,3 +2,4 @@
 Accreditation Website
 BOONZII BUDDYY
 W
+FRieNdsHIp iS mAgiC
