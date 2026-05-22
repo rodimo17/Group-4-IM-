@@ -1,0 +1,190 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Container */
+.form-container {
+    max-width: 850px;
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Headers */
+.form-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-header h3 {
+    margin: 3px 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.form-header h2 {
+    margin: 5px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+}
+
+.form-header hr {
+    border: 0;
+    height: 2px;
+    background: #333;
+    margin: 15px 0;
+}
+
+/* Structure & Layout */
+.form-group {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.row-group label {
+    width: 280px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.row-group input[type="text"],
+.row-group input[type="number"],
+.row-group input[type="date"],
+.row-group input[type="tel"] {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.break {
+    border-top: 1px dashed #e0e0e0;
+    margin: 25px 0;
+}
+
+/* Question Typographies */
+.question-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+/* Options Grid (2 Columns) */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 30px;
+}
+
+/* Options List (Standard block stack) */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.option-item input[type="radio"],
+.option-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.1);
+}
+
+/* Inline text inputs for 'Others' */
+.other-input {
+    border: none;
+    border-bottom: 1px solid #333;
+    margin-left: 8px;
+    padding: 2px 5px;
+    font-size: 14px;
+    flex: 1;
+    outline: none;
+    background: transparent;
+}
+
+/* Member fields alignment */
+.sub-fields {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.input-box input {
+    width: 80px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.total-text {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0056b3;
+}
+
+/* Button Layout */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+/* NEW: Force Single Column Clean Stack Layout */
+.single-column-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.single-column-stack .option-item {
+    grid-column: auto !important; /* Resets any full grid-span overlaps */
+}
