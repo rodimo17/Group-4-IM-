@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Organization - Organization Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">OrgManage</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="organizations.html">Organizations</a></li>
+                <li><a href="add_organization.html" class="active">Add New</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+            <h1 class="mb-2">Add New Organization</h1>
+            
+            <form id="add-org-form" method="POST" action="process_add.php">
+                
+                <!-- Organization Details Section -->
+                <h2 style="color: var(--primary); margin-bottom: var(--spacing-md);">Organization Details</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="org_id">Organization ID *</label>
+                        <input type="text" id="org_id" name="org_id" required placeholder="e.g., ID4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="org_name">Organization Name *</label>
+                        <input type="text" id="org_name" name="org_name" required placeholder="e.g., Green Future Foundation">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="office_address">Office Address *</label>
+                    <input type="text" id="office_address" name="office_address" required placeholder="Complete address">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date_organized">Date Organized *</label>
+                        <input type="date" id="date_organized" name="date_organized" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact_number">Contact Number *</label>
+                        <input type="tel" id="contact_number" name="contact_number" required placeholder="09123456789">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="org_level">4. Organizational Level *</label>
+                        <select id="org_level" name="org_level" required>
+                            <option value="">Select Level</option>
+                            <option value="Barangay-Based">Barangay-Based</option>
+                            <option value="Municipal">Municipal</option>
+                            <option value="City-Based">City-Based</option>
+                            <option value="Regional">Regional</option>
+                            <option value="Affiliate of Large NGO">Affiliate of Large NGO</option>
+                            <option value="National">National</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="linkages_membership">5. Linkages/Membership *</label>
+                        <select id="linkages_membership" name="linkages_membership" required>
+                            <option value="">Select Linkage</option>
+                            <option value="Barangay">Barangay</option>
+                            <option value="Municipal">Municipal</option>
+                            <option value="City">City</option>
+                            <option value="Regional">Regional</option>
+                            <option value="National">National</option>
+                            <option value="International">International</option>
+                            <option value="None">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sector_served">8. Sector/Group Represented/Served * (Hold Ctrl/Cmd for multiple)</label>
+                    <select id="sector_served" name="sector_served[]" multiple required style="height: 120px;">
+                        <option value="Youth">Youth</option>
+                        <option value="Women">Women</option>
+                        <option value="Senior Citizens">Senior Citizens</option>
+                        <option value="PWD">Persons with Disabilities (PWD)</option>
+                        <option value="Children">Children</option>
+                        <option value="Religious">Religious</option>
+                        <option value="Farmers">Farmers</option>
+                        <option value="Fisherfolk">Fisherfolk</option>
+                        <option value="Indigenous Peoples">Indigenous Peoples</option>
+                        <option value="Urban Poor">Urban Poor</option>
+                        <option value="Homeowners/Neighborhood">Homeowners/Neighborhood</option>
+                        <option value="Business Sector">Business Sector</option>
+                        <option value="Workers/Labor">Workers/Labor</option>
+                        <option value="Environment">Environment</option>
+                        <option value="General Public">General Public</option>
+                    </select>
+                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple sectors</small>
+                </div>
+
+                <!-- Accreditation Section -->
+                <h2 style="color: var(--primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Accreditation Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="accreditation_year">Accreditation Year *</label>
+                        <input type="number" id="accreditation_year" name="accreditation_year" required placeholder="2025" min="2000" max="2100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="renewal_status">1. Renewal Status *</label>
+                        <select id="renewal_status" name="renewal_status" required>
+                            <option value="">Select Status</option>
+                            <option value="New">New</option>
+                            <option value="Previously Accredited">Previously Accredited</option>
+                            <option value="Renewed">Renewed</option>
+                            <option value="For Renewal">For Renewal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="male_members">Male Members</label>
+                        <input type="number" id="male_members" name="male_members" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="female_members">Female Members</label>
+                        <input type="number" id="female_members" name="female_members" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="total_members">Total Members</label>
+                        <input type="number" id="total_members" name="total_members" min="0" value="0" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="registered_voter_count">Registered Voters</label>
+                        <input type="number" id="registered_voter_count" name="registered_voter_count" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="unregistered_voter_count">Unregistered Voters</label>
+                        <input type="number" id="unregistered_voter_count" name="unregistered_voter_count" min="0" value="0">
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <h2 style="color: var(--primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Additional Information</h2>
+                
+                <div class="form-group">
+                    <label for="registering_agency">3. Registering Agency * (Hold Ctrl/Cmd for multiple)</label>
+                    <select id="registering_agency" name="registering_agency[]" multiple required style="height: 150px;">
+                        <option value="Department of Social Welfare and Development (DSWD)">Department of Social Welfare and Development (DSWD)</option>
+                        <option value="Department of Labor and Employment (DOLE)">Department of Labor and Employment (DOLE)</option>
+                        <option value="Housing and Land Use Regulatory (HLUR)">Housing and Land Use Regulatory (HLUR)</option>
+                        <option value="Cooperative Development Authority (CDA)">Cooperative Development Authority (CDA)</option>
+                        <option value="Securities and Exchange Commission (SEC)">Securities and Exchange Commission (SEC)</option>
+                        <option value="Department of Trade and Industry (DTI)">Department of Trade and Industry (DTI)</option>
+                        <option value="Department of Agriculture (DA)">Department of Agriculture (DA)</option>
+                        <option value="Department of Environment and Natural Resources (DENR)">Department of Environment and Natural Resources (DENR)</option>
+                        <option value="National Commission on Indigenous Peoples (NCIP)">National Commission on Indigenous Peoples (NCIP)</option>
+                        <option value="Local Government Unit (LGU)">Local Government Unit (LGU)</option>
+                    </select>
+                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple agencies</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">6. Purpose * (Hold Ctrl/Cmd for multiple)</label>
+                    <select id="purpose" name="purpose[]" multiple required style="height: 120px;">
+                        <option value="Livelihood">Livelihood</option>
+                        <option value="Environmental">Environmental</option>
+                        <option value="Social Justice">Social Justice</option>
+                        <option value="Education">Education</option>
+                        <option value="Health">Health</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Disaster Response">Disaster Response</option>
+                        <option value="Community Development">Community Development</option>
+                        <option value="Advocacy">Advocacy</option>
+                        <option value="Cultural Preservation">Cultural Preservation</option>
+                        <option value="Sports & Recreation">Sports & Recreation</option>
+                    </select>
+                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple purposes</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="services_facilities">7. Services/Facilities * (Hold Ctrl/Cmd for multiple)</label>
+                    <select id="services_facilities" name="services_facilities[]" multiple required style="height: 150px;">
+                        <option value="Disaster Response">Disaster Response</option>
+                        <option value="Health Facilities">Health Facilities</option>
+                        <option value="Advocacy & Clean-ups">Advocacy & Clean-ups</option>
+                        <option value="Livelihood Facilities">Livelihood Facilities</option>
+                        <option value="Educational Services">Educational Services</option>
+                        <option value="Training Programs">Training Programs</option>
+                        <option value="Medical Missions">Medical Missions</option>
+                        <option value="Day Care Center">Day Care Center</option>
+                        <option value="Community Hall">Community Hall</option>
+                        <option value="Sports Facilities">Sports Facilities</option>
+                        <option value="Learning Center">Learning Center</option>
+                        <option value="Feeding Program">Feeding Program</option>
+                    </select>
+                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple services</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="financing_source">9. Project Financing * (Hold Ctrl/Cmd for multiple)</label>
+                    <select id="financing_source" name="financing_source[]" multiple required style="height: 120px;">
+                        <option value="Local Domain">Local Domain</option>
+                        <option value="Local Grant">Local Grant</option>
+                        <option value="Membership Dues">Membership Dues</option>
+                        <option value="Fund Raising">Fund Raising</option>
+                        <option value="Government Subsidy">Government Subsidy</option>
+                        <option value="Private Donations">Private Donations</option>
+                        <option value="International Grants">International Grants</option>
+                        <option value="Business Income">Business Income</option>
+                        <option value="Loans">Loans</option>
+                    </select>
+                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple sources</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="local_body_priority">10. Priority Membership in Local Body (Select up to 2)</label>
+                    <div id="priority-checkboxes" style="display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Disaster Risk Reduction Management (BDRRM)">
+                            Barangay Disaster Risk Reduction Management (BDRRM)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Health Council (BHC)">
+                            Barangay Health Council (BHC)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Ecological Solid Waste Management Committee">
+                            Barangay Ecological Solid Waste Management Committee
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Task Force Palengke">
+                            Barangay Task Force Palengke
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Peace and Order Council (BPOC)">
+                            Barangay Peace and Order Council (BPOC)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Anti-Drug Abuse Council (BADAC)">
+                            Barangay Anti-Drug Abuse Council (BADAC)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Council for the Protection of Children (BCPC)">
+                            Barangay Council for the Protection of Children (BCPC)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="local_body_priority[]" value="Barangay Development Council (BDC)">
+                            Barangay Development Council (BDC)
+                        </label>
+                    </div>
+                    <small style="color: var(--gray);">Maximum of 2 selections allowed</small>
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="flex gap-1 mt-2">
+                    <button type="submit" class="btn btn-primary">Submit Organization</button>
+                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                    <a href="organizations.html" class="btn" style="background: var(--gray); color: var(--white);">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Auto-calculate total members
+        const maleInput = document.getElementById('male_members');
+        const femaleInput = document.getElementById('female_members');
+        const totalInput = document.getElementById('total_members');
+
+        function calculateTotal() {
+            const male = parseInt(maleInput.value) || 0;
+            const female = parseInt(femaleInput.value) || 0;
+            totalInput.value = male + female;
+        }
+
+        maleInput.addEventListener('input', calculateTotal);
+        femaleInput.addEventListener('input', calculateTotal);
+
+        // Form validation
+        document.getElementById('add-org-form').addEventListener('submit', function(e) {
+            // This is where you'd add custom validation
+            // For now, HTML5 validation handles required fields
+            
+            // Example: Check if org_id follows format
+            const orgId = document.getElementById('org_id').value;
+            if (!orgId.startsWith('ID')) {
+                alert('Organization ID should start with "ID" (e.g., ID4)');
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
