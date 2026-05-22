@@ -4,13 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Organization - Organization Management System</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Core Portal Styles Integration */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Fixed Navigation Menu bar styling to match typography */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 15px 30px;
+        }
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #7f8c8d;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #007BFF;
+        }
+
+        /* Container & Card matching the main layout design */
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Headings styling */
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 1.35em;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Layout and Element Components */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            font-family: inherit;
+            padding: 10px 14px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #495057;
+            background-color: #fff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+        }
+        input[readonly] {
+            background-color: #e9ecef;
+            opacity: 1;
+            cursor: not-allowed;
+        }
+        small {
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-size: 0.85em;
+        }
+
+        /* Portal Button Styling Framework */
+        .flex { display: flex; }
+        .gap-1 { gap: 12px; }
+        .mt-2 { margin-top: 30px; }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1em;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background 0.3s ease;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-primary {
+            background: #007BFF;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #dae0e5;
+        }
+    </style>
 </head>
 <body>
+
     <!-- Header & Navigation -->
     <header>
         <nav>
-            <a href="index.html" class="logo">OrgManage</a>
+            <a href="index.html" class="logo">PlaceHold Us</a>
             <ul class="nav-links">
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="organizations.html">Organizations</a></li>
@@ -23,12 +179,12 @@
     <!-- Main Content -->
     <div class="container">
         <div class="card">
-            <h1 class="mb-2">Add New Organization</h1>
+            <h1>Add New Organization</h1>
             
             <form id="add-org-form" method="POST" action="process_add.php">
                 
                 <!-- Organization Details Section -->
-                <h2 style="color: var(--primary); margin-bottom: var(--spacing-md);">Organization Details</h2>
+                <h2>Organization Details</h2>
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -107,16 +263,16 @@
                         <option value="Environment">Environment</option>
                         <option value="General Public">General Public</option>
                     </select>
-                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple sectors</small>
+                    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple sectors</small>
                 </div>
 
                 <!-- Accreditation Section -->
-                <h2 style="color: var(--primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Accreditation Information</h2>
+                <h2>Accreditation Information</h2>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="accreditation_year">Accreditation Year *</label>
-                        <input type="number" id="accreditation_year" name="accreditation_year" required placeholder="2025" min="2000" max="2100">
+                        <input type="number" id="accreditation_year" name="accreditation_year" required placeholder="2026" min="2000" max="2100">
                     </div>
                     
                     <div class="form-group">
@@ -161,7 +317,7 @@
                 </div>
 
                 <!-- Additional Information Section -->
-                <h2 style="color: var(--primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">Additional Information</h2>
+                <h2>Additional Information</h2>
                 
                 <div class="form-group">
                     <label for="registering_agency">3. Registering Agency * (Hold Ctrl/Cmd for multiple)</label>
@@ -177,7 +333,7 @@
                         <option value="National Commission on Indigenous Peoples (NCIP)">National Commission on Indigenous Peoples (NCIP)</option>
                         <option value="Local Government Unit (LGU)">Local Government Unit (LGU)</option>
                     </select>
-                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple agencies</small>
+                    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple agencies</small>
                 </div>
 
                 <div class="form-group">
@@ -195,7 +351,7 @@
                         <option value="Cultural Preservation">Cultural Preservation</option>
                         <option value="Sports & Recreation">Sports & Recreation</option>
                     </select>
-                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple purposes</small>
+                    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple purposes</small>
                 </div>
 
                 <div class="form-group">
@@ -214,7 +370,7 @@
                         <option value="Learning Center">Learning Center</option>
                         <option value="Feeding Program">Feeding Program</option>
                     </select>
-                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple services</small>
+                    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple services</small>
                 </div>
 
                 <div class="form-group">
@@ -230,53 +386,53 @@
                         <option value="Business Income">Business Income</option>
                         <option value="Loans">Loans</option>
                     </select>
-                    <small style="color: var(--gray);">Hold Ctrl (Windows) or Cmd (Mac) to select multiple sources</small>
+                    <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple sources</small>
                 </div>
 
                 <div class="form-group">
                     <label for="local_body_priority">10. Priority Membership in Local Body (Select up to 2)</label>
                     <div id="priority-checkboxes" style="display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-top: 0.5rem;">
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Disaster Risk Reduction Management (BDRRM)">
                             Barangay Disaster Risk Reduction Management (BDRRM)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Health Council (BHC)">
                             Barangay Health Council (BHC)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Ecological Solid Waste Management Committee">
                             Barangay Ecological Solid Waste Management Committee
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Task Force Palengke">
                             Barangay Task Force Palengke
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Peace and Order Council (BPOC)">
                             Barangay Peace and Order Council (BPOC)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Anti-Drug Abuse Council (BADAC)">
                             Barangay Anti-Drug Abuse Council (BADAC)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Council for the Protection of Children (BCPC)">
                             Barangay Council for the Protection of Children (BCPC)
                         </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; font-size: 1em;">
                             <input type="checkbox" name="local_body_priority[]" value="Barangay Development Council (BDC)">
                             Barangay Development Council (BDC)
                         </label>
                     </div>
-                    <small style="color: var(--gray);">Maximum of 2 selections allowed</small>
+                    <small>Maximum of 2 selections allowed</small>
                 </div>
 
                 <!-- Form Buttons -->
                 <div class="flex gap-1 mt-2">
                     <button type="submit" class="btn btn-primary">Submit Organization</button>
                     <button type="reset" class="btn btn-secondary">Reset Form</button>
-                    <a href="organizations.html" class="btn" style="background: var(--gray); color: var(--white);">Cancel</a>
+                    <a href="organizations.html" class="btn">Cancel</a>
                 </div>
             </form>
         </div>
@@ -299,9 +455,6 @@
 
         // Form validation
         document.getElementById('add-org-form').addEventListener('submit', function(e) {
-            // This is where you'd add custom validation
-            // For now, HTML5 validation handles required fields
-            
             // Example: Check if org_id follows format
             const orgId = document.getElementById('org_id').value;
             if (!orgId.startsWith('ID')) {
