@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Bagbag Accreditation Form</title>
-    <link rel="stylesheet" href="create.css">
+    <link rel="stylesheet" href="css/create.css">
 </head>
 <body>
 
@@ -16,12 +16,12 @@
         <h3>Lungsod ng Quezon</h3>
         <hr>
         <h2>Application for Accreditation</h2>
-        <h4>(People's Organization and Civil Society Organization)</42>
+        <h2>People's Organization and Civil Society Organization</h2>
     </header>
 
     <div class="break"></div>
 
-    <form action="#" method="POST">
+    <form action="process_form.php" method="POST">
         
         <!-- Application Status -->
         <div class="form-group options-list" style="flex-direction: row; gap: 30px; justify-content: center; margin-bottom: 30px;">
@@ -38,6 +38,14 @@
         <!-- Basic Info -->
         <div class="form-group">
             <div class="row-group">
+                <label>Accreditation Year:</label>
+                <input type="number" name="accreditation_year" min="1900" max="2099" placeholder="YYYY" required>
+            </div>
+            <div class="row-group">
+                <label>Organization ID:</label>
+                <input type="text" name="org_ID" required>
+            </div>
+            <div class="row-group">
                 <label>Name of Organization/Association:</label>
                 <input type="text" name="org_name" required>
             </div>
@@ -51,7 +59,6 @@
             </div>
             <div class="row-group">
                 <label>Contact Number:</label>
-                <!-- pattern="\d*" and maxlength ensures only up to 10 numbers are accepted -->
                 <input type="tel" name="contact_number" pattern="\d*" maxlength="10" title="Please enter exactly 10 digits" required>
             </div>
         </div>
@@ -62,13 +69,13 @@
         <div class="form-group">
             <label class="question-title">Registering Agency (Please check appropriate box)</label>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="registering_agency" value="SEC" required> 1. Security and Exchange Commission</label>
-                <label class="option-item"><input type="radio" name="registering_agency" value="CDA" required> 2. Cooperative Development Authority</label>
-                <label class="option-item"><input type="radio" name="registering_agency" value="HLURB" required> 3. Housing and Land Use Regulatory</label>
-                <label class="option-item"><input type="radio" name="registering_agency" value="DOLE" required> 4. Department of Labor and Employment</label>
-                <label class="option-item"><input type="radio" name="registering_agency" value="DSWD" required> 5. Department of Social Welfare and Development</label>
+                <label class="option-item"><input type="checkbox" name="registering_agency[]" value="SEC"> 1. Security and Exchange Commission</label>
+                <label class="option-item"><input type="checkbox" name="registering_agency[]" value="CDA"> 2. Cooperative Development Authority</label>
+                <label class="option-item"><input type="checkbox" name="registering_agency[]" value="HLURB"> 3. Housing and Land Use Regulatory</label>
+                <label class="option-item"><input type="checkbox" name="registering_agency[]" value="DOLE"> 4. Department of Labor and Employment</label>
+                <label class="option-item"><input type="checkbox" name="registering_agency[]" value="DSWD"> 5. Department of Social Welfare and Development</label>
                 <label class="option-item">
-                    <input type="radio" name="registering_agency" value="Other" required> 
+                    <input type="checkbox" name="registering_agency[]" value="Other"> 
                     6. Other (Please Specify): 
                     <input type="text" class="other-input" name="registering_agency_other">
                 </label>
@@ -83,7 +90,7 @@
             <div class="options-list">
                 <label class="option-item"><input type="radio" name="org_level" value="Barangay-Based" required> 1. Barangay-Based</label>
                 <label class="option-item"><input type="radio" name="org_level" value="Chapter" required> 2. Chapter</label>
-                <label class="option-item"><input type="radio" name="org_level" value="Affiliate" required> 3. Affiliate of Large NGO</label>
+                <label class="option-item"><input type="radio" name="org_level" value="Affiliate of Large NGO" required> 3. Affiliate of Large NGO</label>
                 <label class="option-item">
                     <input type="radio" name="org_level" value="Other" required> 
                     4. Other (Please Specify): 
@@ -109,18 +116,40 @@
 
         <div class="break"></div>
 
-        <!-- Purpose/Objectives -->
+        <!-- Purpose/Objectives of the Organization -->
         <div class="form-group">
             <label class="question-title">Purpose/Objectives of the Organization:</label>
-            <textarea name="purpose_objectives" required></textarea>
+            <div class="single-column-stack">
+                <label class="option-item"><input type="checkbox" name="purpose[]" value="Social Justice"> 1. Social Justice</label>
+                <label class="option-item"><input type="checkbox" name="purpose[]" value="Livelihood"> 2. Livelihood</label>
+                <label class="option-item"><input type="checkbox" name="purpose[]" value="Youth & Sports"> 3. Youth & Sports</label>
+                <label class="option-item"><input type="checkbox" name="purpose[]" value="Environmental"> 4. Environmental</label>
+                <label class="option-item"><input type="checkbox" name="purpose[]" value="Senior Citizens"> 5. Senior Citizens</label>
+                <label class="option-item" style="grid-column: 1 / -1;">
+                    <input type="checkbox" name="purpose[]" value="Other"> 
+                    6. Others (Please Specify):
+                    <input type="text" class="other-input" name="purpose_other" style="max-width: 500px;">
+                </label>
+            </div>
         </div>
 
         <div class="break"></div>
 
-        <!-- Services/Facilities -->
+        <!-- Services/Facilities the Organization can provide or participate in -->
         <div class="form-group">
             <label class="question-title">Services/Facilities the Organization can provide or participate in:</label>
-            <textarea name="services_facilities" required></textarea>
+            <div class="single-column-stack">
+                <label class="option-item"><input type="checkbox" name="services[]" value="Educational"> 1. Educational Facilities</label>
+                <label class="option-item"><input type="checkbox" name="services[]" value="Advocacy"> 2. Advocacy & Clean-ups</label>
+                <label class="option-item"><input type="checkbox" name="services[]" value="Health"> 3. Health Facilities</label>
+                <label class="option-item"><input type="checkbox" name="services[]" value="Disaster"> 4. Disaster Response</label>
+                <label class="option-item"><input type="checkbox" name="services[]" value="Livelihood"> 5. Livelihood Facilities</label>
+                <label class="option-item">
+                    <input type="checkbox" name="services[]" value="Other"> 
+                    6. Others (Please Specify):
+                    <input type="text" class="other-input" name="services_other">
+                </label>
+            </div>
         </div>
 
         <div class="break"></div>
@@ -164,13 +193,13 @@
             <div class="sub-fields">
                 <div class="input-box">
                     <label>Male:</label>
-                    <input type="number" name="members_male" min="0" required>
+                    <input type="number" id="members_male" name="members_male" min="0" value="0" required oninput="calculateTotalMembers()">
                 </div>
                 <div class="input-box">
                     <label>Female:</label>
-                    <input type="number" name="members_female" min="0" required>
+                    <input type="number" id="members_female" name="members_female" min="0" value="0" required oninput="calculateTotalMembers()">
                 </div>
-                <span class="total-text">Total: [________]</span>
+                <span class="total-text">Total: <span id="total_members_display">0</span></span>
             </div>
         </div>
 
@@ -197,14 +226,14 @@
         <div class="form-group">
             <label class="question-title">Source of Funds (Select all that apply):</label>
             <div class="options-grid">
-                <label class="option-item"><input type="checkbox" name="funds" value="Membership Dues"> 1. Membership Dues</label>
-                <label class="option-item"><input type="checkbox" name="funds" value="Fund Raising"> 2. Fund Raising</label>
-                <label class="option-item"><input type="checkbox" name="funds" value="Local Domain"> 3. Local Domain</label>
-                <label class="option-item"><input type="checkbox" name="funds" value="Foreign Donation"> 4. Foreign Donation</label>
-                <label class="option-item"><input type="checkbox" name="funds" value="Local Grant"> 5. Local Grant</label>
-                <label class="option-item"><input type="checkbox" name="funds" value="Foreign Grant"> 6. Foreign Grant</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Membership Dues"> 1. Membership Dues</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Fund Raising"> 2. Fund Raising</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Local Domain"> 3. Local Domain</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Foreign Donation"> 4. Foreign Donation</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Local Grant"> 5. Local Grant</label>
+                <label class="option-item"><input type="checkbox" name="funds[]" value="Foreign Grant"> 6. Foreign Grant</label>
                 <label class="option-item" style="grid-column: 1 / -1;">
-                    <input type="checkbox" name="funds" value="Other"> 
+                    <input type="checkbox" name="funds[]" value="Other"> 
                     7. Others (Pls. specify):
                     <input type="text" class="other-input" name="funds_other">
                 </label>
@@ -217,20 +246,20 @@
         <div class="form-group">
             <label class="question-title">Priority Membership in Local Species Bodies (Please check only two [2]):</label>
             <div class="options-list">
-                <label class="option-item"><input type="checkbox" name="priority" value="BDC"> 1. Barangay Development Council (BDC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="GAD"> 2. Gender & and Development (GAD)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="VAWC"> 3. Violence Against Women and Children (VAWC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BCPC"> 4. Barangay Council for the Protection of Children (BCPC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BADAAC"> 5. Barangay Anti-Drug Abuse Advisory Council (BADAAC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BHC"> 6. Barangay Health Council (BHC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BPOC"> 7. Barangay Peace and Order Council (BPOC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BDRRMC"> 8. Barangay Disaster Risk Reduction Management (BDRRMC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BTFP"> 9. Barangay Task Force Palengke (BTFP)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BTFK"> 10. Barangay Task Force Kalinisan (BTFK)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BDRRMC_Comm"> 11. Barangay Disaster Risk Reduction Management Committee (BDRRMC)</label>
-                <label class="option-item"><input type="checkbox" name="priority" value="BESWMC"> 12. Barangay Ecological Solid Waste Management Committee (BESWMC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BDC"> 1. Barangay Development Council (BDC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="GAD"> 2. Gender & and Development (GAD)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="VAWC"> 3. Violence Against Women and Children (VAWC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BCPC"> 4. Barangay Council for the Protection of Children (BCPC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BADAAC"> 5. Barangay Anti-Drug Abuse Advisory Council (BADAAC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BHC"> 6. Barangay Health Council (BHC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BPOC"> 7. Barangay Peace and Order Council (BPOC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BDRRMC"> 8. Barangay Disaster Risk Reduction Management (BDRRMC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BTFP"> 9. Barangay Task Force Palengke (BTFP)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BTFK"> 10. Barangay Task Force Kalinisan (BTFK)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BDRRMC_Comm"> 11. Barangay Disaster Risk Reduction Management Committee (BDRRMC)</label>
+                <label class="option-item"><input type="checkbox" name="priority[]" value="BESWMC"> 12. Barangay Ecological Solid Waste Management Committee (BESWMC)</label>
                 <label class="option-item">
-                    <input type="checkbox" name="priority" value="Other"> 
+                    <input type="checkbox" name="priority[]" value="Other"> 
                     13. Others (Pls. Specify):
                     <input type="text" class="other-input" name="priority_other">
                 </label>
@@ -244,5 +273,6 @@
     </form>
 </div>
 
+<script src="js/create.js"></script>
 </body>
 </html>

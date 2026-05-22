@@ -5,17 +5,16 @@ require 'connect_db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-    $accreditation_year = (int)date("Y");// to be added sa create.php
-
-    $org_ID             = $_POST['org_ID']; // to be added sa create.php
+    $accreditation_year = $_POST['accreditation_year'];
+    $org_ID           = $_POST['org_ID']; 
     $status           = $_POST['application_status'];
     $org_name         = $_POST['org_name'];
     $org_address      = $_POST['org_address'];
     $date_organized   = $_POST['date_organized'];
     $contact_number   = $_POST['contact_number'];
     $linkages         = $_POST['linkages'];
-    $purpose          = $_POST['purpose_objectives'];
-    $services         = $_POST['services_facilities'];
+    $purpose          = $_POST['purpose'];
+    $services         = $_POST['services'];
 
     //Unique ID's for multivalued tables will not be included here
     //They will be instantiated in the XAMPP instead 
@@ -27,19 +26,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     $male          = (int)$_POST['members_male'];
     $female        = (int)$_POST['members_female'];
-    $total_members = $male + $female; 
+
+    $total_members = $male + $female;
 
     $voters_reg    = (int)$_POST['voters_registered'];
     $voters_unreg  = (int)$_POST['voters_nonregistered'];
 
-
     // SINGLE VALUED TABLES
 
-    $sql_org = "INSERT INTO Org_Details (org_ID, org_name, office_address, date_organized, contact_number, org_level, linkages_membership, sector_served) 
+    $sql_org = "INSERT INTO org_details (org_ID, org_name, office_address, date_organized, contact_number, org_level, linkages_membership, sector_served) 
                 VALUES ('$org_ID', '$org_name', '$org_address', '$date_organized', '$contact_number', '$level', '$linkages', '$sector')";
     $conn->query($sql_org);
 
-    $sql_acc = "INSERT INTO Accreditation_Table (org_ID, accreditation_year, renewal_status, male_members, female_members, total_members, unregistered_voter_count, registered_voter_count) 
+    $sql_acc = "INSERT INTO accreditation (org_ID, accreditation_year, renewal_status, male_members, female_members, total_members, unregistered_voter_count, registered_voter_count) 
                 VALUES ('$org_ID', $accreditation_year, '$status', $male, $female, $total_members, $voters_unreg, $voters_reg)";
     $conn->query($sql_acc);
 
@@ -52,27 +51,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $actual_agency = ($agency_item == 'Other') ? $_POST['registering_agency_other'] : $agency_item;
 
             $sql_agency = "INSERT INTO Registering_Agency (org_ID, accreditation_year, registering_agency) 
-                           VALUES ($org_ID, $accreditation_year, '$actual_agency')";
+                           VALUES ('$org_ID', $accreditation_year, '$actual_agency')";
             $conn->query($sql_agency);
         }
     }
 
-    if (!empty($_POST['purpose_objectives'])) {
-        foreach ($_POST['purpose_objectives'] as $purpose_item) {
-            $actual_purpose = ($purpose_item == 'Other') ? $_POST['purpose_objectives_other'] : $purpose_item;
+    if (!empty($_POST['purpose'])) {
+        foreach ($_POST['purpose'] as $purpose_item) {
+            $actual_purpose = ($purpose_item == 'Other') ? $_POST['purpose_other'] : $purpose_item;
 
             $sql_purpose = "INSERT INTO Purpose (org_ID, accreditation_year, purpose) 
-                            VALUES ($org_ID, $accreditation_year, '$actual_purpose')";
+                            VALUES ('$org_ID', $accreditation_year, '$actual_purpose')";
             $conn->query($sql_purpose);
         }
     }
 
-    if (!empty($_POST['services_facilities'])) {
-        foreach ($_POST['services_facilities'] as $service_item) {
-            $actual_service = ($service_item == 'Other') ? $_POST['services_facilities_other'] : $service_item;
+    if (!empty($_POST['services'])) {
+        foreach ($_POST['services'] as $service_item) {
+            $actual_service = ($service_item == 'Other') ? $_POST['services_other'] : $service_item;
 
-            $sql_services = "INSERT INTO Services_Facilities (org_ID, accreditation_year, services_facilities) 
-                             VALUES ($org_ID, $accreditation_year, '$actual_service')";
+            $sql_services = "INSERT INTO services_facilities (org_ID, accreditation_year, services_facilities) 
+                             VALUES ('$org_ID', $accreditation_year, '$actual_service')";
             $conn->query($sql_services);
         }
     }
@@ -81,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($_POST['funds'] as $fund) {
             $actual_fund = ($fund == 'Other') ? $_POST['funds_other'] : $fund;
             
-            $sql_finance = "INSERT INTO Finance (org_ID, accreditation_year, financing_source) 
+            $sql_finance = "INSERT INTO finance (org_ID, accreditation_year, financing_source) 
                             VALUES ('$org_ID', $accreditation_year, '$actual_fund')";
             $conn->query($sql_finance);
         }
@@ -92,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($_POST['priority'] as $prio) {
             $actual_prio = ($prio == 'Other') ? $_POST['priority_other'] : $prio;
             
-            $sql_priority = "INSERT INTO Local_Body_Priority (org_ID, accreditation_year, local_body_priority) 
+            $sql_priority = "INSERT INTO local_body_priority (org_ID, accreditation_year, local_body_priority) 
                              VALUES ('$org_ID', $accreditation_year, '$actual_prio')";
             $conn->query($sql_priority);
         }
