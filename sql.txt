@@ -1,0 +1,94 @@
+-- Create the primary database
+CREATE DATABASE IF NOT EXISTS org_accreditation_db;
+USE org_accreditation_db;
+
+-- ==========================================
+-- SINGLE-VALUED TABLES (Master Tables)
+-- ==========================================
+
+-- 1. Org_Details_Table
+CREATE TABLE org_details (
+    org_ID VARCHAR(50) PRIMARY KEY,
+    org_name VARCHAR(255) NOT NULL,
+    office_address VARCHAR(255),
+    date_organized DATE,
+    contact_number VARCHAR(50),
+    org_level VARCHAR(100),
+    linkages_membership VARCHAR(100),
+    sector_served VARCHAR(100)
+);
+
+-- 2. Accreditation_Table
+CREATE TABLE accreditation (
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    renewal_status VARCHAR(50),
+    male_members INT DEFAULT 0,
+    female_members INT DEFAULT 0,
+    total_members INT DEFAULT 0,
+    unregistered_voter_count INT DEFAULT 0,
+    registered_voter_count INT DEFAULT 0,
+    PRIMARY KEY (org_ID, accreditation_year),
+    FOREIGN KEY (org_ID) REFERENCES Org_Details(org_ID) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+-- ==========================================
+-- MULTI-VALUED TABLES (Dependent Tables)
+-- ==========================================
+
+-- 3. Registering_Agency_Table
+CREATE TABLE registering_agency (
+    agency_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    registering_agency VARCHAR(255),
+    FOREIGN KEY (org_ID, accreditation_year) REFERENCES Accreditation(org_ID, accreditation_year)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+-- 4. Purpose_Table
+CREATE TABLE purpose (
+    purpose_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    purpose VARCHAR(255),
+    FOREIGN KEY (org_ID, accreditation_year) REFERENCES Accreditation(org_ID, accreditation_year)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+-- 5. Services_Facilities_Table
+CREATE TABLE services_facilities (
+    services_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    services_facilities VARCHAR(255),
+    FOREIGN KEY (org_ID, accreditation_year) REFERENCES Accreditation(org_ID, accreditation_year)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+-- 6. Finance_Table
+CREATE TABLE finance (
+    finance_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    financing_source VARCHAR(255),
+    FOREIGN KEY (org_ID, accreditation_year) REFERENCES Accreditation(org_ID, accreditation_year)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+-- 7. Local_Body_Priority_Table
+CREATE TABLE local_body_priority (
+    local_body_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_ID VARCHAR(50),
+    accreditation_year INT,
+    local_body_priority VARCHAR(255),
+    FOREIGN KEY (org_ID, accreditation_year) REFERENCES Accreditation(org_ID, accreditation_year)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
