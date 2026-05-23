@@ -54,7 +54,8 @@
                     <input type="text" name="org_ID" maxlength="30" required>
                 </div>
                 <div class="row-group">
-                    <label>Name of Organization/Association:</label>
+                      <!-- Either keep this size for org-name + address and adjust na lang sa sql, or yung sa data dictionary mismo.... -->
+                    <label>Name of Organization/Association:</label> 
                     <input type="text" name="org_name" maxlength="70" required>
                 </div>
                 <div class="row-group">
@@ -86,7 +87,7 @@
                     <label class="option-item">
                         <input type="checkbox" name="registering_agency[]" value="Other"> 
                         6. Other (Please Specify): 
-                        <input type="text" class="other-input" name="registering_agency_other" maxlength="150">
+                        <input type="text" class="other-input" name="registering_agency_other" maxlength="45">
                     </label>
                 </div>
             </div>
@@ -103,7 +104,7 @@
                     <label class="option-item">
                         <input type="radio" name="org_level" value="Other" required> 
                         4. Other (Please Specify): 
-                        <input type="text" class="other-input" name="org_level_other" maxlength="65">
+                        <input type="text" class="other-input" name="org_level_other" maxlength="22">
                     </label>
                 </div>
             </div>
@@ -127,7 +128,7 @@
 
             <!-- Purpose/Objectives of the Organization -->
             <div class="form-group">
-                <label class="question-title">Purpose/Objectives of the Organization:</label>
+                <label class="question-title required">Purpose/Objectives of the Organization:</label>
                 <div class="single-column-stack">
                     <label class="option-item"><input type="checkbox" name="purpose[]" value="Social Justice"> 1. Social Justice</label>
                     <label class="option-item"><input type="checkbox" name="purpose[]" value="Livelihood"> 2. Livelihood</label>
@@ -137,7 +138,7 @@
                     <label class="option-item" style="grid-column: 1 / -1;">
                         <input type="checkbox" name="purpose[]" value="Other"> 
                         6. Others (Please Specify):
-                        <input type="text" class="other-input" name="purpose_other" style="max-width: 500px;" maxlength="85">
+                        <input type="text" class="other-input" name="purpose_other" style="max-width: 500px;" maxlength="15">
                     </label>
                 </div>
             </div>
@@ -157,7 +158,7 @@
                     <label class="option-item">
                         <input type="checkbox" name="services[]" value="Other"> 
                         6. Others (Please Specify):
-                        <input type="text" class="other-input" name="services_other" maxlength="115">
+                        <input type="text" class="other-input" name="services_other" maxlength="22">
                     </label>
                 </div>
             </div>
@@ -166,31 +167,31 @@
 
             <!-- Sector/Group Represented -->
             <div class="form-group">
-                <label class="question-title">Sector/Group Represented/Served (Please check only one [1]):</label>
+                <label class="question-title required">Sector/Group Represented/Served (Please check only one [1]):</label>
                 <div class="options-grid">
                     <label class="option-item"><input type="radio" name="sector" value="Academe" required> 1. Academe Education</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Environmental" required> 2. Environmental/ Urban Protection/ Solid Waste</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Transport" required> 3. Transport/PUV Drivers/ Operators/ Toda</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Environmental" required> 2. Environmental/Urban Protection/Solid Waste</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Transport" required> 3. Transport/PUV Drivers/Operators/Toda</label>
                     <label class="option-item"><input type="radio" name="sector" value="Urban Poor" required> 4. Urban Poor</label>
                     <label class="option-item"><input type="radio" name="sector" value="Religious" required> 5. Religious</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Homeowners" required> 6. Homeowners/ Neighborhood</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Homeowners" required> 6. Homeowners/Neighborhood</label>
                     <label class="option-item"><input type="radio" name="sector" value="Cooperatives" required> 7. Cooperatives</label>
                     <label class="option-item"><input type="radio" name="sector" value="Professional" required> 8. Professional</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Charitable" required> 9. Charitable/ Socio- Civic</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Charitable" required> 9. Charitable/Socio-Civic</label>
                     <label class="option-item"><input type="radio" name="sector" value="Livelihood" required> 10. Livelihood/Vendors</label>
                     <label class="option-item"><input type="radio" name="sector" value="Women" required> 11. Women</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Social" required> 12. Social/ Cultural Development</label>
-                    <label class="option-item"><input type="radio" name="sector" value="PWD" required> 13. Person w/ Disability</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Youth" required> 14. Youth/ Children/ Sports</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Social" required> 12. Social/Cultural Development</label>
+                    <label class="option-item"><input type="radio" name="sector" value="PWD" required> 13. Person w/Disability</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Youth" required> 14. Youth/Children/ Sports</label>
                     <label class="option-item"><input type="radio" name="sector" value="Senior Citizens" required> 15. Senior Citizens</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Labor" required> 16. Labor/ Works</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Labor" required> 16. Labor/Works</label>
                     <label class="option-item"><input type="radio" name="sector" value="Business" required> 17. Business Sector</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Social Justice" required> 18. Social Justice/ Peace and Order</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Social Justice" required> 18. Social Justice/Peace and Order</label>
                     <label class="option-item"><input type="radio" name="sector" value="Health" required> 19. Health Sanitation</label>
                     <label class="option-item" style="grid-column: 1 / -1;">
                         <input type="radio" name="sector" value="Other" required> 
                         20. Others (Pls Specify):
-                        <input type="text" class="other-input" name="sector_other" style="max-width: 500px;" maxlength="250">
+                        <input type="text" class="other-input" name="sector_other" style="max-width: 500px;" maxlength="42">
                     </label>
                 </div>
             </div>
@@ -198,6 +199,7 @@
             <div class="break"></div>
 
             <!-- No. of Members (Gender) -->
+             <!-- also this if keep it as 4 or follow yung 6 sa dictionary -->
             <div class="form-group">
                 <label class="question-title">No. of Members (Gender):</label>
                 <div class="sub-fields">
@@ -224,7 +226,7 @@
                         <input type="number" name="voters_registered" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" required>
                     </div>
                     <div class="input-box">
-                        <label>Non-Registered Voters:</label>
+                        <label>Non-Registered:</label>
                         <input type="number" name="voters_nonregistered" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" required>
                     </div>
                 </div>
@@ -245,7 +247,7 @@
                     <label class="option-item" style="grid-column: 1 / -1;">
                         <input type="checkbox" name="funds[]" value="Other"> 
                         7. Others (Pls. specify):
-                        <input type="text" class="other-input" name="funds_other" maxlength="15">
+                        <input type="text" class="other-input" name="funds_other" maxlength="16">
                     </label>
                 </div>
             </div>
@@ -257,7 +259,7 @@
                 <label class="question-title required">Priority Membership in Local Species Bodies (Please check only two [2]):</label>
                 <div class="options-list">
                     <label class="option-item"><input type="checkbox" name="priority[]" value="BDC"> 1. Barangay Development Council (BDC)</label>
-                    <label class="option-item"><input type="checkbox" name="priority[]" value="GAD"> 2. Gender & and Development (GAD)</label>
+                    <label class="option-item"><input type="checkbox" name="priority[]" value="GAD"> 2. Gender and Development (GAD)</label>
                     <label class="option-item"><input type="checkbox" name="priority[]" value="VAWC"> 3. Violence Against Women and Children (VAWC)</label>
                     <label class="option-item"><input type="checkbox" name="priority[]" value="BCPC"> 4. Barangay Council for the Protection of Children (BCPC)</label>
                     <label class="option-item"><input type="checkbox" name="priority[]" value="BADAAC"> 5. Barangay Anti-Drug Abuse Advisory Council (BADAAC)</label>
@@ -271,7 +273,7 @@
                     <label class="option-item">
                         <input type="checkbox" name="priority[]" value="Other"> 
                         13. Others (Pls. Specify):
-                        <input type="text" class="other-input" name="priority_other" maxlength="60">
+                        <input type="text" class="other-input" name="priority_other" maxlength="62">
                     </label>
                 </div>
             </div>
