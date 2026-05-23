@@ -1,12 +1,51 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f9;
-    margin: 0;
-    padding: 20px;
-    color: #333;
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    --text-main: #1d1d1f;
+    --text-sub: #55555a;
+    --shadow-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Container */
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-gradient);
+    margin: 0;
+    padding: 40px 20px;
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.glow-orb {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.orb-1 {
+    top: -10%;
+    left: 5%;
+    background: #6366f1;
+}
+
+.orb-2 {
+    bottom: -10%;
+    right: 5%;
+    background: red;
+}
+
 .form-container {
     max-width: 850px;
     background: #ffffff;
@@ -16,7 +55,6 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* Headers */
 .form-header {
     text-align: center;
     margin-bottom: 25px;
@@ -44,7 +82,6 @@ body {
     margin: 15px 0;
 }
 
-/* Structure & Layout */
 .form-group {
     margin-bottom: 25px;
     display: flex;
@@ -79,7 +116,6 @@ body {
     margin: 25px 0;
 }
 
-/* Question Typographies */
 .question-title {
     font-weight: 700;
     font-size: 15px;
@@ -87,14 +123,12 @@ body {
     color: #222;
 }
 
-/* Options Grid (2 Columns) */
 .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px 30px;
 }
 
-/* Options List (Standard block stack) */
 .options-list {
     display: flex;
     flex-direction: column;
@@ -114,19 +148,6 @@ body {
     transform: scale(1.1);
 }
 
-.status-label {
-    font-weight: 700;
-}
-
-/* Mark required form labels with a red asterisk */
-.required::after {
-    content: " *";
-    color: #d93025;
-    margin-left: 4px;
-    font-weight: 700;
-}
-
-/* Inline text inputs for 'Others' */
 .other-input {
     border: none;
     border-bottom: 1px solid #333;
@@ -138,7 +159,6 @@ body {
     background: transparent;
 }
 
-/* Member fields alignment */
 .sub-fields {
     display: flex;
     align-items: center;
@@ -170,7 +190,6 @@ body {
     color: #0056b3;
 }
 
-/* Button Layout */
 .submit-btn {
     display: block;
     width: 100%;
@@ -190,7 +209,6 @@ body {
     background-color: #218838;
 }
 
-/* NEW: Force Single Column Clean Stack Layout */
 .single-column-stack {
     display: flex !important;
     flex-direction: column !important;
@@ -199,4 +217,12 @@ body {
 
 .single-column-stack .option-item {
     grid-column: auto !important; /* Resets any full grid-span overlaps */
+}
+
+/* Mark required form labels with a red asterisk */
+.required::after {
+    content: " *";
+    color: #d93025;
+    margin-left: 4px;
+    font-weight: 700;
 }
