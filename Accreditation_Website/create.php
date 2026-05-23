@@ -39,7 +39,7 @@
         <div class="form-group">
             <div class="row-group">
                 <label>Accreditation Year:</label>
-                <input type="number" name="accreditation_year" min="1900" max="2099" placeholder="YYYY" required>
+                <input type="number" name="accreditation_year" min="1900" max="2026" placeholder="YYYY" required>
             </div>
             <div class="row-group">
                 <label>Organization ID:</label>

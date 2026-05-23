@@ -13,8 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_organized   = $_POST['date_organized'];
     $contact_number   = $_POST['contact_number'];
     $linkages         = $_POST['linkages'];
-    $purpose          = $_POST['purpose'];
-    $services         = $_POST['services'];
+    //$purpose          = $_POST['purpose']; //check if we can remove
+    //$services         = $_POST['services']; //check if we can remove
 
     //Unique ID's for multivalued tables will not be included here
     //They will be instantiated in the XAMPP instead 
@@ -32,6 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $voters_reg    = (int)$_POST['voters_registered'];
     $voters_unreg  = (int)$_POST['voters_nonregistered'];
 
+
+    //checks for duplicate org_ID
+    $check = $conn->query("SELECT org_ID FROM org_details WHERE org_ID = '$org_ID'");
+    if ($check->num_rows > 0) {
+    die("Organization ID already exists.");
+    }
+
     // SINGLE VALUED TABLES
 
     $sql_org = "INSERT INTO org_details (org_ID, org_name, office_address, date_organized, contact_number, org_level, linkages_membership, sector_served) 
@@ -43,8 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->query($sql_acc);
 
     //MULTI-VALUED TABLES
-
-    // add brackets sa html mamaya ex. name="registering_agency[]"
 
     if (!empty($_POST['registering_agency'])) {
         foreach ($_POST['registering_agency'] as $agency_item) {
@@ -99,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<h2>Success!</h2>";
     echo "<p>Application for <strong>$org_name</strong> has been successfully transferred to MySQL.</p>";
-    echo "<a href='dashboard.php' style='padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;'>Go to Dashboard</a>";
+    echo "<a href='Main_Page.html' style='padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;'>Go to Main Page</a>";
 
 } else {
     echo "You must submit the form first!";
