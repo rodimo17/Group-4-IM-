@@ -4,32 +4,23 @@ function calculateTotalMembers() {
     document.getElementById('total_members_display').textContent = male + female;
 }
 
-// Validate checkbox groups (at least 1 must be selected)
+// Validate checkbox groups (at least 1 must be selected except local body priority)
 function validateCheckboxGroup(name, displayName) {
     const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
     if (checkboxes.length === 0) {
-        alert(`Please select at least one option for "${displayName}"`);
+        alert(`Please select at least one option (exactly 2 options for priority membership) for "${displayName}"`);
         return false;
     }
     return true;
 }
 
-// Updated strict validation for priority membership
 function validatePriorityMembership() {
     const checkedCheckboxes = document.querySelectorAll('input[name="priority[]"]:checked');
     const count = checkedCheckboxes.length;
-
-    if (count === 0) {
-        alert('Please select at least one Priority Membership option.');
+    if (count !== 2) {
+        alert('Please select exactly two (2) Priority Membership options. You have currently selected ' + count + '.');
         return false;
     }
-    
-    // Explicitly check for exactly 1 or 2. If it's 3 or more, block it.
-    if (count > 2) {
-        alert('You have selected ' + count + ' options. Please select only two (2) Priority Membership options.');
-        return false;
-    }
-
     return true;
 }
 
@@ -68,7 +59,6 @@ function validateForm(event) {
     return true;
 }
 
-// Attach validation to form submission
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     if (form) {
