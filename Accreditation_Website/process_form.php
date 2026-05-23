@@ -102,9 +102,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    echo "<h2>Success!</h2>";
-    echo "<p>Application for <strong>$org_name</strong> has been successfully transferred to MySQL.</p>";
-    echo "<a href='Main_Page.html' style='padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;'>Go to Main Page</a>";
+<?php
+echo "<!DOCTYPE html>\n";
+echo "<html lang='en'>\n";
+echo "<head>\n";
+echo "    <meta charset='UTF-8'>\n";
+echo "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n";
+echo "    <title>Submission Success</title>\n";
+echo "    <style>\n";
+echo "        :root { --text-main: #1d1d1f; --primary-color: #34c759; }\n";
+echo "        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); color: var(--text-main); line-height: 1.5; margin: 0; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; position: relative; }\n";
+echo "        .glow-orb { position: absolute; width: 450px; height: 450px; border-radius: 50%; filter: blur(90px); z-index: 0; opacity: 0.5; pointer-events: none; }\n";
+echo "        .orb-1 { top: -10%; left: 10%; background: #6366f1; }\n";
+echo "        .orb-2 { bottom: -5%; right: 10%; background: red; }\n";
+echo "        .main-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; z-index: 1; }\n";
+echo "        .container { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(25px) saturate(190%); -webkit-backdrop-filter: blur(25px) saturate(190%); border: 1px solid rgba(255, 255, 255, 0.4); width: 100%; max-width: 440px; padding: 45px; border-radius: 22px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; box-sizing: border-box; }\n";
+echo "        .container:hover { transform: translateY(-2px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15); }\n";
+echo "        .success-icon { display: inline-flex; justify-content: center; align-items: center; width: 64px; height: 64px; background: rgba(52, 199, 89, 0.12); border-radius: 50%; margin-bottom: 24px; position: relative; }\n";
+echo "        .checkmark { width: 12px; height: 22px; border: solid var(--primary-color); border-width: 0 3px 3px 0; transform: rotate(45deg); margin-top: -4px; }\n";
+echo "        h1 { margin: 0 0 12px 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }\n";
+echo "        .subtitle { color: #434345; margin: 0 0 35px 0; font-size: 15px; }\n";
+echo "        .subtitle strong { color: var(--text-main); font-weight: 600; }\n";
+echo "        .btn { display: block; padding: 14px 24px; font-size: 15px; text-decoration: none; border-radius: 12px; font-weight: 600; transition: all 0.25s ease; background: var(--primary-color); color: #ffffff; box-shadow: 0 4px 12px rgba(52, 199, 89, 0.25); }\n";
+echo "        .btn:hover { background: #28a745; transform: scale(1.015); box-shadow: 0 6px 16px rgba(52, 199, 89, 0.35); }\n";
+echo "        .btn:active { transform: scale(0.985); }\n";
+echo "    </style>\n";
+echo "</head>\n";
+echo "<body>\n";
+echo "    <div class='glow-orb orb-1'></div>\n";
+echo "    <div class='glow-orb orb-2'></div>\n";
+echo "    <div class='main-wrapper'>\n";
+echo "        <div class='container'>\n";
+echo "            <div class='success-icon'><div class='checkmark'></div></div>\n";
+echo "            <h1>Success!</h1>\n";
+echo "            <p class='subtitle'>Application for <strong>$org_name</strong> has been successfully transferred to MySQL.</p>\n";
+echo "            <div class='action-area'>\n";
+echo "                <a href='Main_Page.html' class='btn btn-primary'>Go to Main Page</a>\n";
+echo "            </div>\n";
+echo "        </div>\n";
+echo "    </div>\n";
+echo "</body>\n";
+echo "</html>\n";
+?>
 
 } else {
     echo "You must submit the form first!";
