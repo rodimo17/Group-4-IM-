@@ -25,7 +25,8 @@
         
         <!-- Application Status -->
         <div class="form-group options-list" style="flex-direction: row; gap: 30px; justify-content: center; margin-bottom: 30px;">
-            <label class="option-item">
+        <label class="status-label required">Renewal Status:</label>
+        <label class="option-item">
                 <input type="radio" name="application_status" value="New" required> New
             </label>
             <label class="option-item">
@@ -43,15 +44,15 @@
             </div>
             <div class="row-group">
                 <label>Organization ID:</label>
-                <input type="text" name="org_ID" required>
+                <input type="text" name="org_ID" min = "0" required>
             </div>
             <div class="row-group">
                 <label>Name of Organization/Association:</label>
-                <input type="text" name="org_name" required>
+                <input type="text" name="org_name" maxlength="70" required>
             </div>
             <div class="row-group">
                 <label>Office Address:</label>
-                <input type="text" name="org_address" required>
+                <input type="text" name="org_address" maxlength="100"required>
             </div>
             <div class="row-group">
                 <label>Date Organized/Registered:</label>
@@ -59,7 +60,7 @@
             </div>
             <div class="row-group">
                 <label>Contact Number:</label>
-                <input type="tel" name="contact_number" pattern="\d*" maxlength="10" title="Please enter exactly 10 digits" required>
+                <input type="tel" name="contact_number" pattern="\d*" maxlength="11" title="Please enter exactly 11 digits" required>
             </div>
         </div>
 
@@ -67,7 +68,7 @@
 
         <!-- Registering Agency -->
         <div class="form-group">
-            <label class="question-title">Registering Agency (Please check appropriate box)</label>
+            <label class="question-title required">Registering Agency (Please check appropriate box)</label>
             <div class="options-list">
                 <label class="option-item"><input type="checkbox" name="registering_agency[]" value="SEC"> 1. Security and Exchange Commission</label>
                 <label class="option-item"><input type="checkbox" name="registering_agency[]" value="CDA"> 2. Cooperative Development Authority</label>
@@ -77,7 +78,7 @@
                 <label class="option-item">
                     <input type="checkbox" name="registering_agency[]" value="Other"> 
                     6. Other (Please Specify): 
-                    <input type="text" class="other-input" name="registering_agency_other">
+                    <input type="text" class="other-input" name="registering_agency_other" maxlength="45">
                 </label>
             </div>
         </div>
@@ -86,7 +87,7 @@
 
         <!-- Organizational Level -->
         <div class="form-group">
-            <label class="question-title">Organizational Level: (Please check applicable box)</label>
+            <label class="question-title required">Organizational Level: (Please check applicable box)</label>
             <div class="options-list">
                 <label class="option-item"><input type="radio" name="org_level" value="Barangay-Based" required> 1. Barangay-Based</label>
                 <label class="option-item"><input type="radio" name="org_level" value="Chapter" required> 2. Chapter</label>
@@ -94,7 +95,7 @@
                 <label class="option-item">
                     <input type="radio" name="org_level" value="Other" required> 
                     4. Other (Please Specify): 
-                    <input type="text" class="other-input" name="org_level_other">
+                    <input type="text" class="other-input" name="org_level_other" maxlength="22">
                 </label>
             </div>
         </div>
@@ -103,7 +104,7 @@
 
         <!-- Linkages/Memberships -->
         <div class="form-group">
-            <label class="question-title">Linkages/Memberships:</label>
+            <label class="question-title required">Linkages/Memberships:</label>
             <div class="options-grid">
                 <label class="option-item"><input type="radio" name="linkages" value="Barangay" required> 1. Barangay</label>
                 <label class="option-item"><input type="radio" name="linkages" value="Municipal" required> 2. Municipal</label>
@@ -128,7 +129,7 @@
                 <label class="option-item" style="grid-column: 1 / -1;">
                     <input type="checkbox" name="purpose[]" value="Other"> 
                     6. Others (Please Specify):
-                    <input type="text" class="other-input" name="purpose_other" style="max-width: 500px;">
+                    <input type="text" class="other-input" name="purpose_other" maxlength = "15" style="max-width: 500px;">
                 </label>
             </div>
         </div>
@@ -137,7 +138,7 @@
 
         <!-- Services/Facilities the Organization can provide or participate in -->
         <div class="form-group">
-            <label class="question-title">Services/Facilities the Organization can provide or participate in:</label>
+            <label class="question-title required">Services/Facilities the Organization can provide or participate in:</label>
             <div class="single-column-stack">
                 <label class="option-item"><input type="checkbox" name="services[]" value="Educational"> 1. Educational Facilities</label>
                 <label class="option-item"><input type="checkbox" name="services[]" value="Advocacy"> 2. Advocacy & Clean-ups</label>
@@ -147,7 +148,7 @@
                 <label class="option-item">
                     <input type="checkbox" name="services[]" value="Other"> 
                     6. Others (Please Specify):
-                    <input type="text" class="other-input" name="services_other">
+                    <input type="text" class="other-input" name="services_other" maxlength="22">
                 </label>
             </div>
         </div>
@@ -180,7 +181,7 @@
                 <label class="option-item" style="grid-column: 1 / -1;">
                     <input type="radio" name="sector" value="Other" required> 
                     20. Others (Pls Specify):
-                    <input type="text" class="other-input" name="sector_other" style="max-width: 500px;">
+                    <input type="text" class="other-input" name="sector_other" maxlength = "42" style="max-width: 500px;">
                 </label>
             </div>
         </div>
@@ -224,7 +225,7 @@
 
         <!-- Financial / Funding (Checkboxes) -->
         <div class="form-group">
-            <label class="question-title">Source of Funds (Select all that apply):</label>
+            <label class="question-title required">Source of Funds (Select all that apply):</label>
             <div class="options-grid">
                 <label class="option-item"><input type="checkbox" name="funds[]" value="Membership Dues"> 1. Membership Dues</label>
                 <label class="option-item"><input type="checkbox" name="funds[]" value="Fund Raising"> 2. Fund Raising</label>
@@ -235,7 +236,7 @@
                 <label class="option-item" style="grid-column: 1 / -1;">
                     <input type="checkbox" name="funds[]" value="Other"> 
                     7. Others (Pls. specify):
-                    <input type="text" class="other-input" name="funds_other">
+                    <input type="text" class="other-input" name="funds_other" maxlength="15">
                 </label>
             </div>
         </div>
@@ -244,7 +245,7 @@
 
         <!-- Priority Membership (Checkboxes) -->
         <div class="form-group">
-            <label class="question-title">Priority Membership in Local Species Bodies (Please check only two [2]):</label>
+            <label class="question-title required">Priority Membership in Local Species Bodies (Please check only two [2]):</label>
             <div class="options-list">
                 <label class="option-item"><input type="checkbox" name="priority[]" value="BDC"> 1. Barangay Development Council (BDC)</label>
                 <label class="option-item"><input type="checkbox" name="priority[]" value="GAD"> 2. Gender & and Development (GAD)</label>
@@ -261,7 +262,7 @@
                 <label class="option-item">
                     <input type="checkbox" name="priority[]" value="Other"> 
                     13. Others (Pls. Specify):
-                    <input type="text" class="other-input" name="priority_other">
+                    <input type="text" class="other-input" name="priority_other" maxlength="60">
                 </label>
             </div>
         </div>

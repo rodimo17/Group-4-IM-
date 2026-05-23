@@ -114,6 +114,18 @@ body {
     transform: scale(1.1);
 }
 
+.status-label {
+    font-weight: 700;
+}
+
+/* Mark required form labels with a red asterisk */
+.required::after {
+    content: " *";
+    color: #d93025;
+    margin-left: 4px;
+    font-weight: 700;
+}
+
 /* Inline text inputs for 'Others' */
 .other-input {
     border: none;
