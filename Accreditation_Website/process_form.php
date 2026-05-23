@@ -102,7 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-<?php
 echo "<!DOCTYPE html>\n";
 echo "<html lang='en'>\n";
 echo "<head>\n";
@@ -143,7 +142,7 @@ echo "        </div>\n";
 echo "    </div>\n";
 echo "</body>\n";
 echo "</html>\n";
-?>
+
 
 } else {
     echo "You must submit the form first!";
