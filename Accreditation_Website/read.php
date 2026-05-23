@@ -67,8 +67,6 @@
             echo "<td>" . $row['sector_served'] . "</td>";
             echo "<td>" . $row['renewal_status'] . "</td>";
             echo "<td>" . $row['total_members'] . "</td>";
-            
-            // Displaying the squished multi-valued lists!
             echo "<td>" . ($row['all_agencies'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_funds'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_purposes'] ?? 'None') . "</td>";
