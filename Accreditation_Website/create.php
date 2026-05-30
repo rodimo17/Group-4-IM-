@@ -68,8 +68,8 @@
                 </div>
                 <div class="row-group">
                     <label>Contact Number:</label>
-                    <!-- Retained 11-digit requirement for Philippines phone numbers -->
-                    <input type="tel" name="contact_number" pattern="\d*" maxlength="11" title="Please enter exactly 11 digits" required>
+                    <!-- phone number or landlines smth -->
+                    <input type="tel" name="contact_number" pattern="\d*" maxlength="11" required>
                 </div>
             </div>
 
