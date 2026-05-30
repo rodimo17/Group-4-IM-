@@ -30,7 +30,7 @@ CREATE TABLE accreditation (
     unregistered_voter_count INT(6) DEFAULT 0, -- Matched size 6 
     registered_voter_count INT(6) DEFAULT 0, -- Matched size 6 
     PRIMARY KEY (org_id, accreditation_year),
-    FOREIGN KEY (org_id) REFERENCES Org_Details_Table(org_id) 
+    FOREIGN KEY (org_id) REFERENCES org_details(org_id) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -46,7 +46,7 @@ CREATE TABLE registering_agency (
     accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
     registering_agency VARCHAR(45) NOT NULL, -- Matched size 45 and NOT NULL constraint 
     PRIMARY KEY (agency_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -58,7 +58,7 @@ CREATE TABLE purpose (
     accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
     purpose VARCHAR(15) NOT NULL, -- Matched size 15 and NOT NULL constraint 
     PRIMARY KEY (purpose_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -70,7 +70,7 @@ CREATE TABLE services_facilities (
     accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
     services_facilities VARCHAR(22) NOT NULL, -- Matched size 22 and NOT NULL constraint 
     PRIMARY KEY (services_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -82,7 +82,7 @@ CREATE TABLE finance (
     accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
     financing_source VARCHAR(16) NOT NULL, -- Matched size 16 and NOT NULL constraint 
     PRIMARY KEY (finance_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -94,7 +94,7 @@ CREATE TABLE local_body_priority (
     accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
     local_body_priority VARCHAR(62) NOT NULL, -- Matched size 62 and NOT NULL constraint 
     PRIMARY KEY (local_body_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
