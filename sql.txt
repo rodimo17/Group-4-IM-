@@ -7,7 +7,7 @@ USE org_accreditation_db;
 -- ==========================================
 
 -- 1. Org_Details_Table
-CREATE TABLE Org_Details_Table (
+CREATE TABLE org_details (
     org_id VARCHAR(255) NOT NULL, -- Adjusted size to allow for system-generated Varchar strings; marked as NOT NULL 
     org_name VARCHAR(50) NOT NULL, -- Matched size 50 and NOT NULL constraint 
     office_address VARCHAR(60), -- Matched size 60 
@@ -20,17 +20,17 @@ CREATE TABLE Org_Details_Table (
 );
 
 -- 2. Accreditation_Table
-CREATE TABLE Accreditation_Table (
+CREATE TABLE accreditation (
     org_id VARCHAR(255) NOT NULL, -- Composite PK; matches parent table type 
     accreditation_year INT(4) NOT NULL, -- Composite PK; matched size 4 and NOT NULL constraint 
     renewal_status VARCHAR(21) NOT NULL, -- Matched size 21 and NOT NULL constraint 
     male_members INT(6) DEFAULT 0, -- Matched size 6 
     female_members INT(6) DEFAULT 0, -- Matched size 6 
-    member_count INT(6) DEFAULT 0, -- Renamed from total_members to member_count; matched size 6 
+    total_members INT(6) DEFAULT 0, -- Renamed from total_members to member_count; matched size 6 
     unregistered_voter_count INT(6) DEFAULT 0, -- Matched size 6 
     registered_voter_count INT(6) DEFAULT 0, -- Matched size 6 
     PRIMARY KEY (org_id, accreditation_year),
-    FOREIGN KEY (org_id) REFERENCES Org_Details_Table(org_id) 
+    FOREIGN KEY (org_id) REFERENCES org_details(org_id) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
@@ -40,61 +40,61 @@ CREATE TABLE Accreditation_Table (
 -- ==========================================
 
 -- 3. Agency_Table
-CREATE TABLE Agency_Table (
-    agency_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique [cite: 198]
-    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type [cite: 197]
-    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint [cite: 198]
-    registering_agency VARCHAR(45) NOT NULL, -- Matched size 45 and NOT NULL constraint [cite: 198]
+CREATE TABLE registering_agency (
+    agency_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique 
+    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type 
+    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
+    registering_agency VARCHAR(45) NOT NULL, -- Matched size 45 and NOT NULL constraint 
     PRIMARY KEY (agency_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
 
 -- 4. Purpose_Table
-CREATE TABLE Purpose_Table (
-    purpose_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique [cite: 203]
-    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type [cite: 203]
-    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint [cite: 203]
-    purpose VARCHAR(15) NOT NULL, -- Matched size 15 and NOT NULL constraint [cite: 203]
+CREATE TABLE purpose (
+    purpose_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique 
+    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type 
+    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
+    purpose VARCHAR(15) NOT NULL, -- Matched size 15 and NOT NULL constraint 
     PRIMARY KEY (purpose_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
 
 -- 5. Services_Facilities_Table
-CREATE TABLE Services_Facilities_Table (
-    services_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique [cite: 201]
-    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type [cite: 200]
-    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint [cite: 200]
-    services_facilities VARCHAR(22) NOT NULL, -- Matched size 22 and NOT NULL constraint [cite: 201]
+CREATE TABLE services_facilities (
+    services_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique 
+    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type 
+    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
+    services_facilities VARCHAR(22) NOT NULL, -- Matched size 22 and NOT NULL constraint 
     PRIMARY KEY (services_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
 
 -- 6. Finance_Table
-CREATE TABLE Finance_Table (
-    finance_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique [cite: 195]
-    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type [cite: 195]
-    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint [cite: 195]
-    financing_source VARCHAR(16) NOT NULL, -- Matched size 16 and NOT NULL constraint [cite: 195]
+CREATE TABLE finance (
+    finance_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique 
+    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type 
+    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
+    financing_source VARCHAR(16) NOT NULL, -- Matched size 16 and NOT NULL constraint 
     PRIMARY KEY (finance_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
 
 -- 7. Local_Body_Table
-CREATE TABLE Local_Body_Table (
-    local_body_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique [cite: 206]
-    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type [cite: 205]
-    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint [cite: 205]
-    local_body_priority VARCHAR(62) NOT NULL, -- Matched size 62 and NOT NULL constraint [cite: 205, 206]
+CREATE TABLE local_body_priority (
+    local_body_id INT AUTO_INCREMENT NOT NULL, -- PK; marked NOT NULL, unique 
+    org_id VARCHAR(255) NOT NULL, -- FK; matches parent table type 
+    accreditation_year INT(4) NOT NULL, -- FK; matched size 4 and NOT NULL constraint 
+    local_body_priority VARCHAR(62) NOT NULL, -- Matched size 62 and NOT NULL constraint 
     PRIMARY KEY (local_body_id),
-    FOREIGN KEY (org_id, accreditation_year) REFERENCES Accreditation_Table(org_id, accreditation_year)
+    FOREIGN KEY (org_id, accreditation_year) REFERENCES accreditation(org_id, accreditation_year)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
