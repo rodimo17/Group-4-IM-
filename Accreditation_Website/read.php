@@ -10,6 +10,9 @@
         th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
         th { background-color: #007BFF; color: white; }
         .btn { padding: 8px 12px; background: #d8301a; color: white; text-decoration: none; border-radius: 4px; display: inline-block; }
+        .msg { padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+        .msg-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .msg-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -17,14 +20,20 @@
     <h2>Master Organization Records</h2>
     <a href="Main_Page.html" class="btn">Back</a>
 
+    <?php if (isset($_GET['message'])): ?>
+        <?php $messageClass = (($_GET['message_type'] ?? 'success') === 'error') ? 'msg-error' : 'msg-success'; ?>
+        <div class="msg <?php echo $messageClass; ?>"><?php echo htmlspecialchars($_GET['message']); ?></div>
+    <?php endif; ?>
+
     <?php
     require 'connect_db.php';
 
     $sql = "SELECT 
-                o.org_ID, 
+                    o.org_ID AS org_id, 
                 o.org_name, 
                 o.contact_number,
                 o.sector_served,
+                a.accreditation_year,
                 a.renewal_status,
                 a.total_members,
                 GROUP_CONCAT(DISTINCT r.registering_agency SEPARATOR ', ') AS all_agencies,
@@ -34,13 +43,22 @@
                 GROUP_CONCAT(DISTINCT l.local_body_priority SEPARATOR ', ') AS all_priorities
             FROM org_details o
             LEFT JOIN accreditation a ON o.org_ID = a.org_ID
-            LEFT JOIN Registering_Agency r ON o.org_ID = r.org_ID
-            LEFT JOIN finance f ON o.org_ID = f.org_ID
-            LEFT JOIN Purpose p ON o.org_ID = p.org_ID
-            LEFT JOIN services_facilities s ON o.org_ID = s.org_ID
-            LEFT JOIN local_body_priority l ON o.org_ID = l.org_ID
-            GROUP BY o.org_ID"; 
-
+            LEFT JOIN Registering_Agency r ON o.org_ID = r.org_ID AND a.accreditation_year = r.accreditation_year
+            LEFT JOIN finance f ON o.org_ID = f.org_ID AND a.accreditation_year = f.accreditation_year
+            LEFT JOIN Purpose p ON o.org_ID = p.org_ID AND a.accreditation_year = p.accreditation_year
+            LEFT JOIN services_facilities s ON o.org_ID = s.org_ID AND a.accreditation_year = s.accreditation_year
+            LEFT JOIN local_body_priority l ON o.org_ID = l.org_ID AND a.accreditation_year = l.accreditation_year
+            GROUP BY 
+                o.org_ID,
+                o.org_name,
+                o.contact_number,
+                o.sector_served,
+                a.accreditation_year,
+                a.renewal_status,
+                a.total_members"; 
+                /*Group_Concat() is also an aggregate function (?) kaya include yung other attributes
+                na outside nun sa group by */
+                
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -50,6 +68,7 @@
                 <th>Organization Name</th>
                 <th>Contact</th>
                 <th>Sector</th>
+                <th>Year</th>
                 <th>Status</th>
                 <th>Total Members</th>
                 <th>Registering Agencies</th>
@@ -61,12 +80,13 @@
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row['org_ID'] . "</td>";
-            echo "<td><strong>" . $row['org_name'] . "</strong></td>";
-            echo "<td>" . $row['contact_number'] . "</td>";
-            echo "<td>" . $row['sector_served'] . "</td>";
-            echo "<td>" . $row['renewal_status'] . "</td>";
-            echo "<td>" . $row['total_members'] . "</td>";
+            echo "<td>" . htmlspecialchars($row['org_id']) . "</td>";
+            echo "<td><strong>" . htmlspecialchars($row['org_name']) . "</strong></td>";
+            echo "<td>" . htmlspecialchars($row['contact_number']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['sector_served']) . "</td>";
+            echo "<td>" . ($row['accreditation_year'] ?? 'N/A') . "</td>";
+            echo "<td>" . ($row['renewal_status'] ?? 'N/A') . "</td>";
+            echo "<td>" . ($row['total_members'] ?? 'N/A') . "</td>";
             echo "<td>" . ($row['all_agencies'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_funds'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_purposes'] ?? 'None') . "</td>";
