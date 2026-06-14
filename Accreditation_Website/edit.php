@@ -260,7 +260,7 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
                             'Religious' => 'Religious', 'Homeowners' => 'Homeowners/Neighborhood', 'Cooperatives' => 'Cooperatives',
                             'Professional' => 'Professional', 'Charitable' => 'Charitable/Socio-Civic', 'Livelihood' => 'Livelihood/Vendors',
                             'Women' => 'Women', 'Social' => 'Social/Cultural Development', 'PWD' => 'Person w/Disability',
-                            'Youth' => 'Youth/Children/ Sports', 'Senior Citizens' => 'Senior Citizens', 'Labor' => 'Labor/Works',
+                            'Youth' => 'Youth/Children/Sports', 'Senior Citizens' => 'Senior Citizens', 'Labor' => 'Labor/Works',
                             'Business' => 'Business Sector', 'Social Justice' => 'Social Justice/Peace and Order', 'Health' => 'Health Sanitation'
                         ];
                     ?>
@@ -285,11 +285,11 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Male:</label>
-                        <input type="number" id="members_male" name="male_members" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['male_members'] ?? 0); ?>" required>
+                        <input type="number" id="members_male" name="male_members" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['male_members'] ?? 0); ?>" required>
                     </div>
                     <div class="input-box">
                         <label>Female:</label>
-                        <input type="number" id="members_female" name="female_members" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['female_members'] ?? 0); ?>" required>
+                        <input type="number" id="members_female" name="female_members" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['female_members'] ?? 0); ?>" required>
                     </div>
                     <span class="total-text">Total: <span id="total_members_display"><?php echo htmlspecialchars($row['total_members'] ?? 0); ?></span></span>
                 </div>
@@ -302,11 +302,11 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Registered Voters:</label>
-                        <input type="number" name="registered_voter_count" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['registered_voter_count'] ?? 0); ?>" required>
+                        <input type="number" name="registered_voter_count" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['registered_voter_count'] ?? 0); ?>" required>
                     </div>
                     <div class="input-box">
                         <label>Non-Registered:</label>
-                        <input type="number" name="unregistered_voter_count" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['unregistered_voter_count'] ?? 0); ?>" required>
+                        <input type="number" name="unregistered_voter_count" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['unregistered_voter_count'] ?? 0); ?>" required>
                     </div>
                 </div>
             </div>
@@ -358,7 +358,7 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
             <div class="break"></div>
 
             <div class="action-container">
-                <button type="submit" name="update" class="submit-btn" style="margin: 0;">Save Modifications</button>
+                <button type="submit" name="update" class="submit-btn" style="margin: 0;">Update Changes</button>
                 <a href="update_record.php" class="btn-cancel">Cancel / Exit</a>
             </div>
         </form>

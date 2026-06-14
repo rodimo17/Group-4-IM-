@@ -108,7 +108,7 @@ $result = $conn->query($sql);
         .nav-link:hover { opacity: 0.8; }
         
         /*for the search function*/
-.search-box {
+          .search-box {
             margin: 20px 0 30px 0;
             display: flex;
             gap: 12px;
@@ -140,6 +140,25 @@ $result = $conn->query($sql);
         }
         .btn-search:hover { background: var(--primary-hover); }
         .btn-search:active { transform: scale(0.98); }
+
+        .btn-clear {
+          padding: 12px 20px;
+          background: #6c757d; 
+          color: #ffffff;
+         text-decoration: none;
+         border-radius: 12px;
+         font-size: 14px;
+         font-weight: 600;
+         display: inline-block;
+         transition: all 0.2s;
+         box-sizing: border-box;
+        }
+      .btn-clear:hover { 
+       background: #5a6268; 
+       }
+       .btn-clear:active { 
+    transform: scale(0.98); 
+        }
         
         .table-wrapper {
             width: 100%;
@@ -207,6 +226,18 @@ $result = $conn->query($sql);
         }
         .btn-edit:active { transform: scale(0.97); }
 
+         .msg {
+            padding: 14px 18px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .msg-success {
+            background: rgba(52, 199, 89, 0.12);
+            color: #248a3d;
+            border: 1px solid rgba(52, 199, 89, 0.25);
+        }
         .msg-error {
             background: rgba(255, 59, 48, 0.1);
             color: #cc2e24;
@@ -230,8 +261,8 @@ $result = $conn->query($sql);
         <div class="msg <?php echo $messageClass; ?>"><?php echo htmlspecialchars($_GET['message']); ?></div>
     <?php endif; ?>
 
-    <form action="update_record.php" method="GET" class="search-container">
-        <input type="text" name="search" class="search-input" placeholder="Search by Organization's ID or Name:" value="<?php echo htmlspecialchars($search_keyword); ?>">
+    <form action="update_record.php" method="GET" class="search-box">
+        <input type="text" name="search" class="search-input" placeholder="Search by Organization's ID or Name" value="<?php echo htmlspecialchars($search_keyword); ?>">
         <button type="submit" class="btn-search">Search</button> 
         
         <?php if ($search_keyword !== ''): ?> <!-- only if it is nonempty and search button is clicked-->
@@ -272,7 +303,7 @@ $result = $conn->query($sql);
                     <td><?php echo $row['all_services'] ?? 'None'; ?></td>
                     <td><?php echo $row['all_priorities'] ?? 'None'; ?></td>
                     <td style="white-space: nowrap;">
-                        <a href="edit.php?org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>" class="btn">Edit</a>
+                        <a href="edit.php?org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>" class="btn-edit">Edit</a>
                     </td> <!-- edit.php will be utilized if the edit button is selected -->
                 </tr>
             <?php endwhile; ?>
