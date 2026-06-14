@@ -26,111 +26,243 @@ $sql = "SELECT
         LEFT JOIN services_facilities s ON o.org_ID = s.org_ID AND a.accreditation_year = s.accreditation_year
         LEFT JOIN local_body_priority l ON o.org_ID = l.org_ID AND a.accreditation_year = l.accreditation_year";
 
-// Strict check ensures "0" is treated as a valid search keyword
-if ($search_keyword !== '') {
-    $safe_search = mysqli_real_escape_string($conn, $search_keyword);
-    // org_ID or org_name string matching
-    $sql .= " WHERE o.org_ID LIKE '%$safe_search%' OR o.org_name LIKE '%$safe_search%'";
+// Apply filter conditions if a search keyword was provided
+if (!empty($search_keyword)) {
+    $search_escaped = mysqli_real_escape_string($conn, $search_keyword);
+    $sql .= " WHERE o.org_name LIKE '%$search_escaped%' OR o.org_ID LIKE '%$search_escaped%'";
 }
-// Finish the query with the group by
-$sql .= " GROUP BY 
-            o.org_ID,
-            o.org_name,
-            o.contact_number,
-            o.sector_served,
-            a.accreditation_year,
-            a.renewal_status,
-            a.total_members";
 
-$result = $conn->query($sql);
+$sql .= " GROUP BY o.org_ID, a.accreditation_year";
+$result = mysqli_query($conn, $sql);
 ?>
-
-<!-- update_record.php design -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Records</title>
+    <title>Update Organization Records</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
-        th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
-        th { background-color: #007BFF; color: white; }
-        .btn { padding: 8px 12px; background: #007BFF; color: white; text-decoration: none; border-radius: 4px; display: inline-block; }
-        .btn-back { background: #d8301a; margin-right: 10px; }
-        .msg { padding: 10px; margin-bottom: 10px; border-radius: 4px; }
-        .msg-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .msg-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        :root {
+            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            --panel-bg: rgba(255, 255, 255, 1);
+            --panel-border: rgba(255, 255, 255, 0.4);
+            --text-main: #1d1d1f;
+            --text-sub: #55555a;
+            --shadow-color: rgba(0, 0, 0, 0.06);
+            --primary-color: #0071e3;
+            --primary-hover: #0077ed;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            box-sizing: border-box;
+            scrollbar-width: none;  
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        .form-container {
+            max-width: 1250px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 22px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+        h2 {
+            margin: 0 0 25px 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 0.8; }
         
-        /*for the search function*/
-        .search-container { margin: 20px 0; display: flex; gap: 10px; }
-        .search-input { padding: 8px 12px; width: 300px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
-        .btn-search { padding: 8px 15px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
-        .btn-clear { padding: 8px 15px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; }
+        .search-box {
+            margin: 20px 0 30px 0;
+            display: flex;
+            gap: 12px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--primary-color);
+            background: #ffffff;
+        }
+        .btn-search {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-search:hover { background: var(--primary-hover); }
+        .btn-search:active { transform: scale(0.98); }
+        
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.3);
+            margin-bottom: 15px;
+        }
+        .table-wrapper::-webkit-scrollbar {
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 113, 227, 0.2);
+            border-radius: 10px;
+        }
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 113, 227, 0.4);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: left;
+        }
+        th {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--text-main);
+            font-weight: 700;
+            padding: 14px 16px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+        }
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            color: #3a3a3c;
+            white-space: nowrap;
+        }
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background-color: rgba(255, 255, 255, 0.25); }
+        
+        .btn-edit {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 13px;
+            box-shadow: 0 4px 10px rgba(0, 113, 227, 0.15);
+            transition: all 0.2s;
+        }
+        .btn-edit:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 14px rgba(0, 113, 227, 0.25);
+        }
+        .btn-edit:active { transform: scale(0.97); }
+
+        .msg-error {
+            background: rgba(255, 59, 48, 0.1);
+            color: #cc2e24;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
     </style>
 </head>
-
 <body>
-    <h2>Update Records</h2>
-    <a href="Main_Page.html" class="btn btn-back">Back</a> <!-- will return to main page if back button is selected -->
 
-    <?php if (isset($_GET['message'])): ?>
-        <?php $messageClass = (($_GET['message_type'] ?? 'success') === 'error') ? 'msg-error' : 'msg-success'; ?>
-        <div class="msg <?php echo $messageClass; ?>"><?php echo htmlspecialchars($_GET['message']); ?></div>
-    <?php endif; ?>
+    <div class="form-container">
+        <a href="Main_Page.html" class="nav-link">&larr; Back to Main Page</a>
+        <h2>Update Organization Records</h2>
 
-    <form action="update_record.php" method="GET" class="search-container">
-        <input type="text" name="search" class="search-input" placeholder="Search by Organization's ID or Name:" value="<?php echo htmlspecialchars($search_keyword); ?>">
-        <button type="submit" class="btn-search">Search</button> 
-        
-        <?php if ($search_keyword !== ''): ?> <!-- only if it is nonempty and search button is clicked-->
-            <a href="update_record.php" class="btn-clear">Clear</a>
-        <?php endif; ?> <!-- will return to the display records once the clear button is selected-->
-    </form>
+        <form method="GET" action="update_record.php" class="search-box">
+            <input type="text" name="search" class="search-input" placeholder="Search by Organization Name or ID..." value="<?php echo htmlspecialchars($search_keyword); ?>">
+            <button type="submit" class="btn-search">Search</button>
+        </form>
 
-    <?php if ($result && $result->num_rows > 0): ?>
-        <table>
-            <tr>
-                <th>Org ID</th>
-                <th>Organization Name</th>
-                <th>Contact</th>
-                <th>Sector</th>
-                <th>Year</th>
-                <th>Status</th>
-                <th>Total Members</th>
-                <th>Registering Agencies</th>
-                <th>Funding Sources</th>
-                <th>Purposes</th>
-                <th>Services/Facilities</th>
-                <th>Local Priorities</th>
-                <th>Actions</th>
-            </tr>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['org_id']); ?></td>
-                    <td><strong><?php echo htmlspecialchars($row['org_name']); ?></strong></td>
-                    <td><?php echo htmlspecialchars($row['contact_number']); ?></td>
-                    <td><?php echo htmlspecialchars($row['sector_served']); ?></td>
-                    <td><?php echo $row['accreditation_year'] ?? 'N/A'; ?></td>
-                    <td><?php echo $row['renewal_status'] ?? 'N/A'; ?></td>
-                    <td><?php echo $row['total_members'] ?? 'N/A'; ?></td>
-                    <td><?php echo $row['all_agencies'] ?? 'None'; ?></td>
-                    <td><?php echo $row['all_funds'] ?? 'None'; ?></td>
-                    <td><?php echo $row['all_purposes'] ?? 'None'; ?></td>
-                    <td><?php echo $row['all_services'] ?? 'None'; ?></td>
-                    <td><?php echo $row['all_priorities'] ?? 'None'; ?></td>
-                    <td style="white-space: nowrap;">
-                        <a href="edit.php?org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>" class="btn">Edit</a>
-                    </td> <!-- edit.php will be utilized if the edit button is selected -->
-                </tr>
-            <?php endwhile; ?>
-        </table>
-    <?php else: ?>
-        <p style="color: #721c24; background: #f8d7da; padding: 15px; border-radius: 4px; border: 1px solid #f5c6cb;">
-            No records found! <!-- no records matched or empty database -->
-        </p>
-    <?php endif; ?>
+        <?php if ($result && mysqli_num_rows($result) > 0): ?>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Org ID</th>
+                            <th>Organization Name</th>
+                            <th>Contact Number</th>
+                            <th>Sector Served</th>
+                            <th>Accreditation Year</th>
+                            <th>Renewal Status</th>
+                            <th>Total Members</th>
+                            <th>Registering Agencies</th>
+                            <th>Sources of Funds</th>
+                            <th>Purposes / Objectives</th>
+                            <th>Services / Facilities</th>
+                            <th>Local Body Priorities</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['org_id']); ?></td>
+                                <td><strong><?php echo htmlspecialchars($row['org_name']); ?></strong></td>
+                                <td><?php echo htmlspecialchars($row['contact_number']); ?></td>
+                                <td><?php echo htmlspecialchars($row['sector_served']); ?></td>
+                                <td><?php echo htmlspecialchars($row['accreditation_year'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($row['renewal_status'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($row['total_members'] ?? 'N/A'); ?></td>
+                                <td><?php echo htmlspecialchars($row['all_agencies'] ?? 'None'); ?></td>
+                                <td><?php echo htmlspecialchars($row['all_funds'] ?? 'None'); ?></td>
+                                <td><?php echo htmlspecialchars($row['all_purposes'] ?? 'None'); ?></td>
+                                <td><?php echo htmlspecialchars($row['all_services'] ?? 'None'); ?></td>
+                                <td><?php echo htmlspecialchars($row['all_priorities'] ?? 'None'); ?></td>
+                                <td>
+                                    <a href="edit.php?org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>" class="btn-edit">Edit</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="msg-error" style="text-align: center;">No records found matching your query details.</div>
+        <?php endif; ?>
+    </div>
+
 </body>
 </html>
