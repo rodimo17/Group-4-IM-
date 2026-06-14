@@ -44,18 +44,18 @@
             <!-- Basic Info -->
             <div class="form-group">
                 <div class="row-group">
-                    <label>Accreditation Year:</label>
+                    <label class = "status-label required">Accreditation Year:</label>
                     <!-- Retained max 2026 but applied new inline length validation -->
                     <input type="number" name="accreditation_year" min="1900" max="2026" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" placeholder="YYYY" required>
                 </div>
                 <div class="row-group">
-                    <label>Organization ID:</label>
+                    <label class = "status-label required">Organization ID:</label>
                     <!-- Retained capital 'ID' for PHP script -->
                     <input type="text" name="org_ID" maxlength="30" required>
                 </div>
                 <div class="row-group">
                       <!-- Either keep this size for org-name + address and adjust na lang sa sql, or yung sa data dictionary mismo.... -->
-                    <label>Name of Organization/Association:</label> 
+                    <label class = "status-label required">Name of Organization/Association</label> 
                     <input type="text" name="org_name" maxlength="70" required>
                 </div>
                 <div class="row-group">
