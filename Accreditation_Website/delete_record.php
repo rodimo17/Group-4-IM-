@@ -313,7 +313,7 @@ $result = $conn->query($sql);
                     <td><?php echo $row['all_priorities'] ?? 'None'; ?></td>
                     <td style="white-space: nowrap;">
                         <a href="delete_record.php?action=delete&org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>"
-                           class="btn" 
+                           class="btn-delete" 
                            style="background:#dc3545;" 
                            onclick="return confirm('Delete this record permanently?');">
                            Delete
