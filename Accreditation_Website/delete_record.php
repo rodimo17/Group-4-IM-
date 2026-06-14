@@ -56,10 +56,10 @@ $sql = "SELECT
         LEFT JOIN services_facilities s ON o.org_ID = s.org_ID AND a.accreditation_year = s.accreditation_year
         LEFT JOIN local_body_priority l ON o.org_ID = l.org_ID AND a.accreditation_year = l.accreditation_year";
 
-// for handling 0 and string matching org_name (similar with update_record's search bar)
+// for handling 0 and string matching org_name and org_id (similar with update_record's search bar)
 if ($search_name !== '') {
     $safe_search = mysqli_real_escape_string($conn, $search_name);
-    $sql .= " WHERE o.org_name LIKE '%$safe_search%'";
+    $sql .= " WHERE o.org_ID LIKE '%$safe_search%' OR o.org_name LIKE '%$safe_search%'";
 }
 
 $sql .= " GROUP BY 
@@ -185,6 +185,24 @@ $result = $conn->query($sql);
         }
         .btn-search:hover { background: #0077ed; }
         .btn-search:active { transform: scale(0.98); }
+         .btn-clear {
+          padding: 12px 20px;
+          background: #6c757d; 
+          color: #ffffff;
+         text-decoration: none;
+         border-radius: 12px;
+         font-size: 14px;
+         font-weight: 600;
+         display: inline-block;
+         transition: all 0.2s;
+         box-sizing: border-box;
+        }
+     .btn-clear:hover { 
+       background: #5a6268; 
+      }
+     .btn-clear:active { 
+    transform: scale(0.98); 
+     }
         
         .table-wrapper {
             width: 100%;
@@ -271,7 +289,7 @@ $result = $conn->query($sql);
     <?php endif; ?>
 
     <form action="delete_record.php" method="GET" class="search-box">
-        <input type="text" name="search_name" class="search-input" placeholder="Type Organization Name to filter..." value="<?php echo htmlspecialchars($search_name); ?>">
+        <input type="text" name="search_name" class="search-input" placeholder="Search by Organization's ID or Name" value="<?php echo htmlspecialchars($search_name); ?>">
         <button type="submit" class="btn-search">Search</button>
         
         <?php if ($search_name !== ''): ?>
@@ -313,7 +331,7 @@ $result = $conn->query($sql);
                     <td><?php echo $row['all_priorities'] ?? 'None'; ?></td>
                     <td style="white-space: nowrap;">
                         <a href="delete_record.php?action=delete&org_id=<?php echo urlencode($row['org_id']); ?>&accreditation_year=<?php echo urlencode($row['accreditation_year']); ?>"
-                           class="btn" 
+                           class="btn-delete" 
                            style="background:#dc3545;" 
                            onclick="return confirm('Delete this record permanently?');">
                            Delete
