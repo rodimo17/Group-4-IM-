@@ -189,7 +189,7 @@
                     <label class="option-item"><input type="radio" name="sector" value="Women" required> 11. Women</label>
                     <label class="option-item"><input type="radio" name="sector" value="Social" required> 12. Social/Cultural Development</label>
                     <label class="option-item"><input type="radio" name="sector" value="PWD" required> 13. Person w/Disability</label>
-                    <label class="option-item"><input type="radio" name="sector" value="Youth" required> 14. Youth/Children/ Sports</label>
+                    <label class="option-item"><input type="radio" name="sector" value="Youth" required> 14. Youth/Children/Sports</label>
                     <label class="option-item"><input type="radio" name="sector" value="Senior Citizens" required> 15. Senior Citizens</label>
                     <label class="option-item"><input type="radio" name="sector" value="Labor" required> 16. Labor/Works</label>
                     <label class="option-item"><input type="radio" name="sector" value="Business" required> 17. Business Sector</label>
