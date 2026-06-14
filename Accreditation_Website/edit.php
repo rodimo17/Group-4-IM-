@@ -285,11 +285,11 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Male:</label>
-                        <input type="number" id="members_male" name="male_members" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['male_members'] ?? 0); ?>" required>
+                        <input type="number" id="members_male" name="male_members" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['male_members'] ?? 0); ?>" required>
                     </div>
                     <div class="input-box">
                         <label>Female:</label>
-                        <input type="number" id="members_female" name="female_members" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['female_members'] ?? 0); ?>" required>
+                        <input type="number" id="members_female" name="female_members" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="<?php echo htmlspecialchars($row['female_members'] ?? 0); ?>" required>
                     </div>
                     <span class="total-text">Total: <span id="total_members_display"><?php echo htmlspecialchars($row['total_members'] ?? 0); ?></span></span>
                 </div>
@@ -302,11 +302,11 @@ if (isset($_GET['org_id']) && isset($_GET['accreditation_year'])) {
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Registered Voters:</label>
-                        <input type="number" name="registered_voter_count" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" value="<?php echo htmlspecialchars($row['registered_voter_count'] ?? 0); ?>" required>
+                        <input type="number" name="registered_voter_count" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['registered_voter_count'] ?? 0); ?>" required>
                     </div>
                     <div class="input-box">
                         <label>Non-Registered:</label>
-                        <input type="number" name="unregistered_voter_count" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" value="<?php echo htmlspecialchars($row['unregistered_voter_count'] ?? 0); ?>" required>
+                        <input type="number" name="unregistered_voter_count" min="0" max="9999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" value="<?php echo htmlspecialchars($row['unregistered_voter_count'] ?? 0); ?>" required>
                     </div>
                 </div>
             </div>

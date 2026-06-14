@@ -13,8 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_organized = $_POST['date_organized'];
     $contact_number = $_POST['contact_number'];
     $linkages = $_POST['linkages'];
-    //$purpose          = $_POST['purpose']; //check if we can remove
-    //$services         = $_POST['services']; //check if we can remove
 
     //Unique ID's for multivalued tables will not be included here
     //They will be instantiated in the XAMPP instead 
@@ -50,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->query($sql_acc);
 
     //MULTI-VALUED TABLES
-
     if (!empty($_POST['registering_agency'])) {
         foreach ($_POST['registering_agency'] as $agency_item) {
             $actual_agency = ($agency_item == 'Other') ? $_POST['registering_agency_other'] : $agency_item;
