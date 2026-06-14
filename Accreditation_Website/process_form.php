@@ -1,18 +1,18 @@
 <?php
-// WIP
+
 require 'connect_db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $accreditation_year = $_POST['accreditation_year'];
-    $org_ID           = $_POST['org_ID']; 
-    $status           = $_POST['application_status'];
-    $org_name         = $_POST['org_name'];
-    $org_address      = $_POST['org_address'];
-    $date_organized   = $_POST['date_organized'];
-    $contact_number   = $_POST['contact_number'];
-    $linkages         = $_POST['linkages'];
+    $org_ID = $_POST['org_ID']; 
+    $status = $_POST['application_status'];
+    $org_name = $_POST['org_name'];
+    $org_address = $_POST['org_address'];
+    $date_organized = $_POST['date_organized'];
+    $contact_number = $_POST['contact_number'];
+    $linkages = $_POST['linkages'];
     //$purpose          = $_POST['purpose']; //check if we can remove
     //$services         = $_POST['services']; //check if we can remove
 
@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $level  = ($_POST['org_level'] == 'Other') ? $_POST['org_level_other'] : $_POST['org_level'];
     $sector = ($_POST['sector'] == 'Other') ? $_POST['sector_other'] : $_POST['sector'];
   
-    $male          = (int)$_POST['members_male'];
-    $female        = (int)$_POST['members_female'];
+    $male = (int)$_POST['members_male'];
+    $female = (int)$_POST['members_female'];
 
     $total_members = $male + $female;
 
-    $voters_reg    = (int)$_POST['voters_registered'];
-    $voters_unreg  = (int)$_POST['voters_nonregistered'];
+    $voters_reg = (int)$_POST['voters_registered'];
+    $voters_unreg = (int)$_POST['voters_nonregistered'];
 
 
     //checks for duplicate org_ID

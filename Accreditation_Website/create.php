@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barangay Bagbag Accreditation Form</title>
-    <!-- Retained original CSS/JS paths for backend compatibility -->
     <link rel="stylesheet" href="css/create.css">
 </head>
 <body>
-    <!-- New Visual Elements -->
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
@@ -25,8 +23,10 @@
 
         <div class="break"></div>
 
-        <!-- Retained original action and method for PHP processing -->
+        <!-- creates a web form and gathers its data to process_form.php -->
         <form action="process_form.php" method="POST">
+
+        <!-- Textfield Restrictions and Initialization -->
             
             <!-- Application Status -->
             <div class="form-group options-list" style="flex-direction: row; gap: 30px; justify-content: center; margin-bottom: 30px;">
@@ -41,38 +41,46 @@
 
             <div class="break"></div>
 
-            <!-- Basic Info -->
+            
+            <!-- Organization Details -->
             <div class="form-group">
-                <div class="row-group">
+                
+                <!-- Accreditation Year -->
+                <div class="row-group">         
                     <label class = "status-label required">Accreditation Year:</label>
-                    <!-- Retained max 2026 but applied new inline length validation -->
-                    <input type="number" name="accreditation_year" min="1900" max="2026" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" placeholder="YYYY" required>
+                    <input type="number" name="accreditation_year" min="1900" max="<?php echo date('Y'); ?>" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" placeholder="YYYY" required>
                 </div>
+
+                <!-- Organization ID -->
                 <div class="row-group">
                     <label class = "status-label required">Organization ID:</label>
-                    <!-- Retained capital 'ID' for PHP script -->
                     <input type="text" name="org_ID" maxlength="30" required>
                 </div>
+
+                <!-- Organization Name -->
                 <div class="row-group">
-                      <!-- Either keep this size for org-name + address and adjust na lang sa sql, or yung sa data dictionary mismo.... -->
                     <label class = "status-label required">Name of Organization/Association</label> 
-                    <input type="text" name="org_name" maxlength="70" required>
+                    <input type="text" name="org_name" maxlength="50" required>
                 </div>
+
+                <!-- Office Address -->
                 <div class="row-group">
                     <label>Office Address:</label>
-                    <input type="text" name="org_address" maxlength="100" required>
+                    <input type="text" name="org_address" maxlength="60" required>
                 </div>
+
+                <!-- Date Organized/Registered -->
                 <div class="row-group">
                     <label>Date Organized/Registered:</label>
                     <input type="date" name="date_organized" required>
                 </div>
+
+                <!-- Contact Number -->
                 <div class="row-group">
                     <label>Contact Number:</label>
-                    <!-- phone number or landlines smth -->
                     <input type="tel" name="contact_number" pattern="\d*" maxlength="11" required>
                 </div>
             </div>
-
             <div class="break"></div>
 
             <!-- Registering Agency -->
@@ -126,7 +134,7 @@
 
             <div class="break"></div>
 
-            <!-- Purpose/Objectives of the Organization -->
+            <!-- Purpose/Objectives of the Organization (Checkboxes) -->
             <div class="form-group">
                 <label class="question-title required">Purpose/Objectives of the Organization:</label>
                 <div class="single-column-stack">
@@ -145,11 +153,10 @@
 
             <div class="break"></div>
 
-            <!-- Services/Facilities the Organization can provide or participate in -->
+            <!-- Services/Facilities (Checkboxes) -->
             <div class="form-group">
                 <label class="question-title required">Services/Facilities the Organization can provide or participate in:</label>
                 <div class="single-column-stack">
-                    <!-- Retained [] for multi-value PHP database parsing -->
                     <label class="option-item"><input type="checkbox" name="services[]" value="Educational"> 1. Educational Facilities</label>
                     <label class="option-item"><input type="checkbox" name="services[]" value="Advocacy"> 2. Advocacy & Clean-ups</label>
                     <label class="option-item"><input type="checkbox" name="services[]" value="Health"> 3. Health Facilities</label>
@@ -199,18 +206,19 @@
             <div class="break"></div>
 
             <!-- No. of Members (Gender) -->
-             <!-- also this if keep it as 4 or follow yung 6 sa dictionary -->
             <div class="form-group">
                 <label class="question-title">No. of Members (Gender):</label>
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Male:</label>
-                        <input type="number" id="members_male" name="members_male" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4); calculateTotalMembers();" value="0" required>
+                        <input type="number" id="members_male" name="members_male" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="0" required>
                     </div>
                     <div class="input-box">
                         <label>Female:</label>
-                        <input type="number" id="members_female" name="members_female" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4); calculateTotalMembers();" value="0" required>
+                        <input type="number" id="members_female" name="members_female" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6); calculateTotalMembers();" value="0" required>
                     </div>
+
+                    <!-- calls a js function to calculate the total members in create.js -->
                     <span class="total-text">Total: <span id="total_members_display">0</span></span>
                 </div>
             </div>
@@ -223,11 +231,11 @@
                 <div class="sub-fields">
                     <div class="input-box">
                         <label>Registered Voters:</label>
-                        <input type="number" name="voters_registered" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" required>
+                        <input type="number" name="voters_registered" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" required>
                     </div>
                     <div class="input-box">
                         <label>Non-Registered:</label>
-                        <input type="number" name="voters_nonregistered" min="0" max="9999" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" required>
+                        <input type="number" name="voters_nonregistered" min="0" max="999999" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);" required>
                     </div>
                 </div>
             </div>

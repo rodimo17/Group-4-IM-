@@ -1,3 +1,4 @@
+//Automatic Calculation of Total Members
 function calculateTotalMembers() {
     const male = parseInt(document.getElementById('members_male').value) || 0;
     const female = parseInt(document.getElementById('members_female').value) || 0;

@@ -1,7 +1,7 @@
 <?php
 include 'connect_db.php';
 
-// 1. ALWAYS initialize your variables out in the open (Global Scope)
+//initiating global variables
 $row = null;
 $org_id = null;
 $accreditation_year = null;
