@@ -8,5 +8,5 @@ Guide on how to deploy
 3. Launch XAMPP, and start both Apache and mySQL
 4. find the admin button on my SQL row and copy the SQL textfile in the github repo, and click SQL button (found on the top middle of the website)
 5. Paste the SQL code and run
-6. go to http://localhost/(your folder name containing the github repo), and do the create function
+6. go to http://localhost/(your folder name containing the github repo), and do the create function (example: http://localhost/Group-4-IM-/Accreditation_Website/)
 7. to check the sql database, go to XAMPP app, and find the mySQL row, and click admin, you will be taken to phpmyadmin and check manually the tables (sadly cannot check all the tables in one go, one-by-one only).
