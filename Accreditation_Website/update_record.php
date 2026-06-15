@@ -278,7 +278,7 @@ $result = $conn->query($sql);
                 <th>Organization Name</th>
                 <th>Contact</th>
                 <th>Sector</th>
-                <th>Year</th>
+                <th>Accreditation Year</th>
                 <th>Status</th>
                 <th>Total Members</th>
                 <th>Registering Agencies</th>

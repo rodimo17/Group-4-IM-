@@ -148,7 +148,7 @@
     require 'connect_db.php';
 
     $sql = "SELECT 
-                    o.org_ID AS org_id, 
+                o.org_ID AS org_id, 
                 o.org_name, 
                 o.contact_number,
                 o.sector_served,
@@ -188,7 +188,7 @@
                 <th>Organization Name</th>
                 <th>Contact</th>
                 <th>Sector</th>
-                <th>Year</th>
+                <th>Accreditation Year</th>
                 <th>Status</th>
                 <th>Total Members</th>
                 <th>Registering Agencies</th>
@@ -212,7 +212,6 @@
             echo "<td>" . ($row['all_purposes'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_services'] ?? 'None') . "</td>";
             echo "<td>" . ($row['all_priorities'] ?? 'None') . "</td>";
-            
             echo "</tr>";
         }
         
